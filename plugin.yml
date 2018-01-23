@@ -1,9 +1,9 @@
 name: EssentialsPE
 main: EssentialsPE\Loader
-version: 2.0.0
-api: [3.0.0-ALPHA7, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10]
-author: LegendsOfMCPE Team
-website: https://github.com/LegendOfMCPE/EssentialsPE
+version: 3.0.0-rewrite
+api: [3.0.0-ALPHA10]
+author: VMPE Development Team
+website: Not showing.
 
 permissions:
     essentials:
@@ -427,7 +427,7 @@ permissions:
                         default: op
                         description: "Allow to create colored signs"
                     essentials.sign.create:
-                        default: false
+                        default: op
                         description: "Allow to create special signs"
                         children:
                             essentials.sign.create.free:
@@ -470,7 +470,7 @@ permissions:
                         default: false
                         description: "Bypass paying for special signs"
                     essentials.sign.use:
-                        default: false
+                        default: op
                         description: "Allow to use special signs"
                         children:
                             essentials.sign.use.free:
