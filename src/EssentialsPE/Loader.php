@@ -10,6 +10,7 @@ use EssentialsPE\Commands\AFK;
 use EssentialsPE\Commands\Antioch;
 use EssentialsPE\Commands\Back;
 use EssentialsPE\Commands\BreakCommand;
+use EssentialsPE\Command\BigTreeCommand;
 use EssentialsPE\Commands\Broadcast;
 use EssentialsPE\Commands\Burn;
 use EssentialsPE\Commands\ClearInventory;
@@ -29,6 +30,7 @@ use EssentialsPE\Commands\Extinguish;
 use EssentialsPE\Commands\Fly;
 use EssentialsPE\Commands\GetPos;
 use EssentialsPE\Commands\God;
+use EssentialsPE\Commands\Hat;
 use EssentialsPE\Commands\Heal;
 use EssentialsPE\Commands\Home\DelHome;
 use EssentialsPE\Commands\Home\Home;
@@ -69,6 +71,7 @@ use EssentialsPE\Commands\Teleport\TPDeny;
 use EssentialsPE\Commands\Teleport\TPHere;
 use EssentialsPE\Commands\TempBan;
 use EssentialsPE\Commands\Top;
+use EssentialsPE\Commands\TreeCommand;
 use EssentialsPE\Commands\Unlimited;
 use EssentialsPE\Commands\Vanish;
 use EssentialsPE\Commands\Warp\DelWarp;
@@ -141,7 +144,7 @@ class Loader extends PluginBase{
             new AFK($this->getAPI()),
             new Antioch($this->getAPI()),
             new Back($this->getAPI()),
-            // new BigTreeCommand($this->getAPI()), TODO
+            new BigTreeCommand($this->getAPI()),
             new BreakCommand($this->getAPI()),
             new Broadcast($this->getAPI()),
             new Burn($this->getAPI()),
@@ -154,7 +157,7 @@ class Loader extends PluginBase{
             new Fly($this->getAPI()),
             new GetPos($this->getAPI()),
             new God($this->getAPI()),
-            // new Hat($this->getAPI()), TODO
+            new Hat($this->getAPI()),
             new Heal($this->getAPI()),
             new ItemCommand($this->getAPI()),
             new ItemDB($this->getAPI()),
@@ -181,7 +184,7 @@ class Loader extends PluginBase{
             new Suicide($this->getAPI()),
             new TempBan($this->getAPI()),
             new Top($this->getAPI()),
-            // new TreeCommand($this->getAPI()), TODO
+            new TreeCommand($this->getAPI()),
             new Unlimited($this->getAPI()),
             new Vanish($this->getAPI()),
             new Whois($this->getAPI()),
