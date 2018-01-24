@@ -229,9 +229,9 @@ permissions:
                     essentials.itemspawn.item-all:
                         default: op
                         description: "Let you spawn any item"
-                    #essentials.itemspawn.exempt:
-                    #    default: op
-                    #    description: "Allow the spawning of blacklisted items"
+                    essentials.itemspawn.exempt:
+                        default: op
+                        description: "Allow the spawning of blacklisted items"
             essentials.jump:
                 default: op
                 description: "Teleport you to the block you're looking at"
@@ -258,6 +258,9 @@ permissions:
                     essentials.kit.other:
                         default: op
                         description: "Give a kit to other players"
+                    essentials.kits.*:
+                        default: op
+                        description: "Access to all kits."
             essentials.lightning:
                 default: op
                 description: "Strike a lightning!"
@@ -602,6 +605,9 @@ permissions:
                     essentials.warp.other:
                         default: op
                         description: "Teleport other players to a warp"
+                    essentials.warps.*:
+                        default: op
+                        description: "Access to every warp."
             essentials.whois:
                 default: true
                 description: "Display information about a player"
