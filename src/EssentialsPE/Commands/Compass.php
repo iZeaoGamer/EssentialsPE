@@ -51,7 +51,7 @@ class Compass extends BaseCommand{
                 return false;
                 break;
         }
-        $sender->sendMessage(TextFormat::AQUA . "§aYou're facing §b" . TextFormat::LIGHT_BLUE . $direction);
+        $sender->sendMessage(TextFormat::AQUA . "§aYou're facing §b" . TextFormat::AQUA . $direction);
         return true;
     }
 }

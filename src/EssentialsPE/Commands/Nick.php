@@ -53,7 +53,7 @@ class Nick extends BaseCommand{
         }
         $player->sendMessage(TextFormat::GREEN . "§dYour nick §5" . ($m = !$nick ? "§dhas been removed" : "§dis now " . TextFormat::DARK_PURPLE . $nick));
         if($player !== $sender){
-            $sender->sendMessage(TextFormat::PURPLE . $player->getName() . (substr($player->getName(), -1, 1) === "s" ? "'" : "§d's") . " §dnick " . $m);
+            $sender->sendMessage(TextFormat::LIGHT_PURPLE . $player->getName() . (substr($player->getName(), -1, 1) === "s" ? "'" : "§d's") . " §dnick " . $m);
         }
         return true;
     }
