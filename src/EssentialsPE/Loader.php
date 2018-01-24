@@ -104,7 +104,7 @@ class Loader extends PluginBase{
             mkdir($this->getDataFolder());
         }
         
-		$this->getLogger()->info(TextFormat::YELLOW . "Loading...");
+		$this->getLogger()->info(TextFormat::YELLOW . "§6Loading...");
         $this->registerEvents();
         $this->registerCommands();
         if(count($p = $this->getServer()->getOnlinePlayers()) > 0){
@@ -154,7 +154,7 @@ class Loader extends PluginBase{
             new Fly($this->getAPI()),
             new GetPos($this->getAPI()),
             new God($this->getAPI()),
-            //new Hat($this->getAPI()), TODO: Implement when MCPE implements "Block-Hat rendering"
+            new Hat($this->getAPI()),
             new Heal($this->getAPI()),
             new ItemCommand($this->getAPI()),
             new ItemDB($this->getAPI()),
@@ -181,7 +181,7 @@ class Loader extends PluginBase{
             new Suicide($this->getAPI()),
             new TempBan($this->getAPI()),
             new Top($this->getAPI()),
-            //new TreeCommand($this->getAPI()), TODO
+            new TreeCommand($this->getAPI()),
             new Unlimited($this->getAPI()),
             new Vanish($this->getAPI()),
             new Whois($this->getAPI()),
@@ -240,7 +240,7 @@ class Loader extends PluginBase{
 		        }
 		    }
 	    } else {
-	        $this->getLogger()->info(TextFormat::YELLOW . "SimpleWarp installed, disabling EssentialsPE warps...");
+	        $this->getLogger()->info(TextFormat::YELLOW . "§6SimpleWarp installed, disabling EssentialsPE warps...");
 	    }
 
 		foreach($teleportCommands as $teleportCommand) {
