@@ -43,7 +43,7 @@ class Balance extends BaseCommand{
                 return false;
             }
         }
-        $sender->sendMessage(TextFormat::AQUA . ($player === $sender ? "§aYour current balance is§b " : $player->getDisplayName() . TextFormat::GREEN . " §ahas ") . TextFormat::LIGHT_BLUE . $this->getAPI()->getCurrencySymbol() . $this->getAPI()->getPlayerBalance($player));
+        $sender->sendMessage(TextFormat::AQUA . ($player === $sender ? "§aYour current balance is§b " : $player->getDisplayName() . TextFormat::GREEN . " §ahas ") . TextFormat::AQUA . $this->getAPI()->getCurrencySymbol() . $this->getAPI()->getPlayerBalance($player));
         return true;
     }
 }
