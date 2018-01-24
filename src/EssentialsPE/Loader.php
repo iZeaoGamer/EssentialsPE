@@ -141,7 +141,7 @@ class Loader extends PluginBase{
             new AFK($this->getAPI()),
             new Antioch($this->getAPI()),
             new Back($this->getAPI()),
-            new BigTreeCommand($this->getAPI()),
+            // new BigTreeCommand($this->getAPI()), TODO
             new BreakCommand($this->getAPI()),
             new Broadcast($this->getAPI()),
             new Burn($this->getAPI()),
@@ -181,7 +181,7 @@ class Loader extends PluginBase{
             new Suicide($this->getAPI()),
             new TempBan($this->getAPI()),
             new Top($this->getAPI()),
-            new TreeCommand($this->getAPI()),
+            // new TreeCommand($this->getAPI()), TODO
             new Unlimited($this->getAPI()),
             new Vanish($this->getAPI()),
             new Whois($this->getAPI()),
