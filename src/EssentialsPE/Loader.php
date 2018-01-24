@@ -10,7 +10,7 @@ use EssentialsPE\Commands\AFK;
 use EssentialsPE\Commands\Antioch;
 use EssentialsPE\Commands\Back;
 use EssentialsPE\Commands\BreakCommand;
-use EssentialsPE\Command\BigTreeCommand;
+use EssentialsPE\Commands\BigTreeCommand;
 use EssentialsPE\Commands\Broadcast;
 use EssentialsPE\Commands\Burn;
 use EssentialsPE\Commands\ClearInventory;
