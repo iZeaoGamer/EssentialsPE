@@ -961,7 +961,7 @@ class BaseAPI{
 		        $item = $this->readableNameToItem($item_name);
 	        }
         }else{
-            $item = Item::get($item_name);
+            $item = Item::get(string $item_name);
         }
         $item->setDamage($damage);
 
