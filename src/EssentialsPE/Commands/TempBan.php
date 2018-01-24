@@ -36,7 +36,7 @@ class TempBan extends BaseCommand{
         }
         $name = array_shift($args);
         if(!($info = $this->getAPI()->stringToTimestamp(implode(" ", $args)))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Please specify a valid time");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Please specify a valid time");
             return false;
         }
         /** @var \DateTime $date */
@@ -44,14 +44,14 @@ class TempBan extends BaseCommand{
         $reason = $info[1];
         if(($player = $this->getAPI()->getPlayer($name)) instanceof Player){
             if($player->hasPermission("essentials.ban.exempt")){
-                $sender->sendMessage(TextFormat::RED . "[Error] " . $player->getDisplayName() . " can't be banned");
+                $sender->sendMessage(TextFormat::RED . "[Error] " . $player->getDisplayName() . " §2can't be banned because they either have the permission: essentials.ban.exempt or because they're OP.");
                 return false;
             }else{
-                $player->kick(TextFormat::RED . "Banned until " . TextFormat::AQUA . $date->format("l, F j, Y") . TextFormat::RED . " at " . TextFormat::AQUA . $date->format("h:ia") . (trim($reason) !== "" ? TextFormat::YELLOW . "\nReason: " . TextFormat::RESET . $reason : ""), false);
+                $player->kick(TextFormat::RED . "§aBanned until " . TextFormat::AQUA . $date->format("l, F j, Y") . TextFormat::DARK_PURPLE . " at " . TextFormat::DARK_AQUA . $date->format("h:ia") . (trim($reason) !== "" ? TextFormat::YELLOW . "§d\nReason: " . TextFormat::DARK_PURPLE . $reason : ""), false);
             }
         }
         $sender->getServer()->getNameBans()->addBan(($player instanceof Player ? $player->getName() : $name), (trim($reason) !== "" ? $reason : null), $date, "essentialspe");
-        Command::broadcastCommandMessage($sender, "Banned player " . ($player instanceof Player ? $player->getName() : $name) . " until " . $date->format("l, F j, Y") . " at " . $date->format("h:ia") . (trim($reason) !== "" ? TextFormat::YELLOW . " Reason: " . TextFormat::RESET . $reason : ""));
+        Command::broadcastCommandMessage($sender, "§dBanned player §5" . ($player instanceof Player ? $player->getName() : $name) . " §auntil §3" . $date->format("l, F j, Y") . " §bat §3" . $date->format("h:ia") . (trim($reason) !== "" ? TextFormat::YELLOW . " §dReason: " . TextFormat::DARK_PURPLE . $reason : ""));
         return true;
     }
 }

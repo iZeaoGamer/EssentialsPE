@@ -40,7 +40,7 @@ class Nick extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }elseif(!($player = $this->getAPI()->getPlayer($args[1]))){
-                $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                 return false;
             }
         }
@@ -48,12 +48,12 @@ class Nick extends BaseCommand{
             $this->getAPI()->removeNick($player);
         }else{
             if(!$this->getAPI()->setNick($player, $nick)){
-                $sender->sendMessage(TextFormat::RED . "[Error] You don't have permissions to give 'colored' nicknames");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2You don't have permissions to give 'colored' nicknames");
             }
         }
-        $player->sendMessage(TextFormat::GREEN . "Your nick " . ($m = !$nick ? "has been removed" : "is now " . TextFormat::RESET . $nick));
+        $player->sendMessage(TextFormat::GREEN . "§dYour nick §5" . ($m = !$nick ? "§dhas been removed" : "§dis now " . TextFormat::DARK_PURPLE . $nick));
         if($player !== $sender){
-            $sender->sendMessage(TextFormat::GREEN . $player->getName() . (substr($player->getName(), -1, 1) === "s" ? "'" : "'s") . " nick " . $m);
+            $sender->sendMessage(TextFormat::PURPLE . $player->getName() . (substr($player->getName(), -1, 1) === "s" ? "'" : "§d's") . " §dnick " . $m);
         }
         return true;
     }

@@ -27,7 +27,7 @@ class Ping extends BaseCommand{
         if(!$this->testPermission($sender)){
             return false;
         }
-        $sender->sendMessage("Pong!");
+        $sender->sendMessage("§6Pong!");
         return true;
     }
 }

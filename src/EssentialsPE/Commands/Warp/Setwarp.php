@@ -34,14 +34,14 @@ class Setwarp extends BaseCommand{
             return false;
         }
         if(($existed = $this->getAPI()->warpExists($args[0])) && !$sender->hasPermission("essentials.warp.override.*") && !$sender->hasPermission("essentials.warp.override.$args[0]")){
-            $sender->sendMessage(TextFormat::RED . "[Error] You can't modify this warp position");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2You can't modify this warp position");
             return false;
         }
         if(!$this->getAPI()->setWarp($args[0], $sender->getPosition(), $sender->getYaw(), $sender->getPitch())){
-            $sender->sendMessage(TextFormat::RED . "Invalid warp name given! Please be sure to only use alphanumerical characters and underscores");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Invalid warp name given! Please be sure to only use alphanumerical characters and underscores");
             return false;
         }
-        $sender->sendMessage(TextFormat::GREEN . "Warp successfully " . ($existed ? "updated!" : "created!"));
+        $sender->sendMessage(TextFormat::GREEN . "§dWarp successfully " . ($existed ? "§5updated!" : "§3created!"));
         return true;
     }
 } 

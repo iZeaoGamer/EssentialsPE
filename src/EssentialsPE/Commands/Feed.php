@@ -36,7 +36,7 @@ class Feed extends BaseCommand{
         }
         $player = $sender;
         if(isset($args[0]) && !($player = $this->getAPI()->getPlayer($args[0]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
             return false;
         }
 	    if($player->getName() !== $sender->getName() && !$sender->hasPermission("essentials.feed.other")) {
@@ -45,9 +45,9 @@ class Feed extends BaseCommand{
 	    }
         $player->setFood(20);
         $player->getLevel()->addParticle(new HappyVillagerParticle($player->add(0, 2)));
-        $player->sendMessage(TextFormat::GREEN . "You have been fed!");
+        $player->sendMessage(TextFormat::GREEN . "§dYou have been fed!");
         if($player !== $sender){
-            $sender->sendMessage(TextFormat::GREEN . $player->getDisplayName() . " has been fed!");
+            $sender->sendMessage(TextFormat::DARK_PURPLE . $player->getDisplayName() . " §dhas been fed!");
         }
         return true;
     }

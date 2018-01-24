@@ -49,7 +49,7 @@ class BigTreeCommand extends BaseCommand{
             $block = $sender->getTargetBlock(100, $transparent);
         }*/
         if($block === null){
-            $sender->sendMessage(TextFormat::RED . "There isn't a reachable block");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2There isn't a reachable block");
             return false;
         }
         switch(strtolower($args[0])){
@@ -63,13 +63,13 @@ class BigTreeCommand extends BaseCommand{
                 $type = Sapling::JUNGLE;
                 break;
             default:
-                $sender->sendMessage(TextFormat::RED . "Invalid tree type, try with:\n<tree|redwood|jungle>");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Invalid tree type, try with:\n<tree|redwood|jungle>");
                 return false;
                 break;
         }
         $tree = new BigTree();
         $tree->placeObject($sender->getLevel(), $block->getFloorX(), $block->getFloorY() + 1, $block->getFloorZ(), $type);
-        $sender->sendMessage(TextFormat::GREEN . "BigTree spawned!");
+        $sender->sendMessage(TextFormat::GREEN . "§dBigTree spawned!");
         return true;
     }
 } 

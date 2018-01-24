@@ -30,7 +30,7 @@ class KickAll extends BaseCommand{
             return false;
         }
         if(($count = count($this->getAPI()->getServer()->getOnlinePlayers())) < 1 || ($sender instanceof Player && $count < 2)){
-            $sender->sendMessage(TextFormat::RED . "[Error] There are no more players in the server");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2There are no more players in the server");
             return false;
         }
         if(count($args) < 1){
@@ -43,7 +43,7 @@ class KickAll extends BaseCommand{
                 $p->kick($reason, false);
             }
         }
-        $sender->sendMessage(TextFormat::AQUA . "Kicked all the players!");
+        $sender->sendMessage(TextFormat::AQUA . "§dKicked all the players!");
         return true;
     }
 }

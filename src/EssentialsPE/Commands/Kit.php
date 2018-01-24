@@ -34,16 +34,16 @@ class Kit extends BaseCommand{
             return false;
         }elseif(count($args) === 0){
             if(($list = $this->getAPI()->kitList(false)) === false){
-                $sender->sendMessage(TextFormat::AQUA . "There are currently no Kits available");
+                $sender->sendMessage(TextFormat::AQUA . "§c[Error] §2There are currently no Kits available");
                 return false;
             }
-            $sender->sendMessage(TextFormat::AQUA . "Available kits:\n" . $list);
+            $sender->sendMessage(TextFormat::AQUA . "§aHere are a available kits:\n§b" . $list);
             return true;
         }elseif(!isset($args[1]) && !$sender instanceof Player){
             $this->sendUsage($sender, $alias);
             return false;
         }elseif(!($kit = $this->getAPI()->getKit($args[0]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Kit doesn't exist");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Kit doesn't exist");
             return false;
         }
         switch(count($args)){
@@ -53,11 +53,11 @@ class Kit extends BaseCommand{
                     return false;
                 }
                 if(!$sender->hasPermission("essentials.kits.*") && !$sender->hasPermission("essentials.kits." . strtolower($args[0]))){
-                    $sender->sendMessage(TextFormat::RED . "[Error] You can't obtain this kit");
+                    $sender->sendMessage(TextFormat::RED . "[Error] §2You can't obtain this kit");
                     return false;
                 }
                 $kit->giveToPlayer($sender);
-                $sender->sendMessage(TextFormat::GREEN . "Getting kit " . TextFormat::AQUA . $kit->getName() . "...");
+                $sender->sendMessage(TextFormat::GREEN . "§5Getting kit §3" . TextFormat::DARK_AQUA . $kit->getName() . "§5...");
                 break;
             case 2:
                 if(!$sender->hasPermission("essentials.kit.other")){
@@ -65,16 +65,16 @@ class Kit extends BaseCommand{
                     return false;
                 }
                 if(!$sender->hasPermission("essentials.kits.*") && !$sender->hasPermission("essentials.kits." . strtolower($args[0]))){
-                    $sender->sendMessage(TextFormat::RED . "[Error] You can't obtain this kit");
+                    $sender->sendMessage(TextFormat::RED . "[Error] §2You can't obtain this kit");
                     return false;
                 }
                 if(!($player = $this->getAPI()->getPlayer($args[1]))){
-                    $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                    $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                     return false;
                 }
                 $kit->giveToPlayer($player);
-                $player->sendMessage(TextFormat::GREEN . "Getting kit " . TextFormat::AQUA . $kit->getName() . "...");
-                $sender->sendMessage(TextFormat::GREEN . "Giving " . TextFormat::YELLOW . $player->getDisplayName() . TextFormat::GREEN . " kit " . TextFormat::AQUA . $kit->getName() . TextFormat::GREEN . "...");
+                $player->sendMessage(TextFormat::GREEN . "§5Getting kit " . TextFormat::DARK_AQUA . $kit->getName() . "§5...");
+                $sender->sendMessage(TextFormat::GREEN . "§5Giving " . TextFormat::DARK_AQUA . $player->getDisplayName() . TextFormat::DARK_PURPLE . " §dkit " . TextFormat::DARK_AQUA . $kit->getName() . TextFormat::GREEN . "§5...");
                 break;
             default:
                 $this->sendUsage($sender, $alias);
@@ -87,17 +87,17 @@ class Kit extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }elseif(!($player = $this->getAPI()->getPlayer($args[1]))){
-                $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                 return false;
             }
         }
         if(!$sender->hasPermission("essentials.kits.*") && !$sender->hasPermission("essentials.kits." . strtolower($args[0]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] You can't obtain this kit");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2You can't obtain this kit");
             return false;
         }
-        $player->sendMessage(TextFormat::GREEN . "Getting kit " . TextFormat::AQUA . $kit->getName() . "...");
+        $player->sendMessage(TextFormat::GREEN . "§5Getting kit " . TextFormat::DARK_AQUA . $kit->getName() . "§5...");
         if($player !== $sender){
-            $sender->sendMessage(TextFormat::GREEN . "Giving " . TextFormat::YELLOW . $player->getDisplayName() . TextFormat::GREEN . " kit " . TextFormat::AQUA . $kit->getName() . TextFormat::GREEN . "...");
+            $sender->sendMessage(TextFormat::GREEN . "§5Giving " . TextFormat::DARK_AQUA . $player->getDisplayName() . TextFormat::GREEN . " §5kit " . TextFormat::DARK_AQUA . $kit->getName() . TextFormat::GREEN . "§5...");
         }
         return true;
     }

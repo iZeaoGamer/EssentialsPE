@@ -1208,7 +1208,7 @@ class BaseAPI{
             $message
         );
         if(strpos($message, "§") !== false && ($player instanceof Player) && !$player->hasPermission("essentials.colorchat") && !$force){
-            $player->sendMessage(TextFormat::RED . "You can't chat using colors!");
+            $player->sendMessage(TextFormat::RED . "§2You can't chat using colors!");
             return null;
         }
         return $message;
@@ -1351,7 +1351,7 @@ class BaseAPI{
             }
             $this->getSession($player)->setMuted($ev->willMute(), $ev->getMutedUntil());
             if($notify && $player->hasPermission("essentials.mute.notify")){
-                $player->sendMessage(TextFormat::YELLOW . "You have been " . ($this->isMuted($player) ? "muted " . ($ev->getMutedUntil() !== null ? "until: " . TextFormat::AQUA . $ev->getMutedUntil()->format("l, F j, Y") . TextFormat::RED . " at " . TextFormat::AQUA . $ev->getMutedUntil()->format("h:ia") : TextFormat::AQUA . "Forever" . TextFormat::YELLOW . "!") : "unmuted!"));
+                $player->sendMessage(TextFormat::YELLOW . "§6You have been " . ($this->isMuted($player) ? "§5muted " . ($ev->getMutedUntil() !== null ? "§6until: " . TextFormat::GREEN . $ev->getMutedUntil()->format("l, F j, Y") . TextFormat::RED . " §6at " . TextFormat::GREEN . $ev->getMutedUntil()->format("h:ia") : TextFormat::DARK_PURPLE . "Forever" . TextFormat::YELLOW . "!") : "§dYou have been unmuted!"));
             }
         }
         return true;
@@ -1533,7 +1533,7 @@ class BaseAPI{
         return [
             "name" => $player->getName(),
             "nick" => $player->getDisplayName(),
-            //"money" => $this->getPlayerBalance($player), TODO
+            "money" => $this->getPlayerBalance($player),
             "afk" => $this->isAFK($player),
             "location" => $this->getGeoLocation($player)
         ];
@@ -1812,7 +1812,7 @@ class BaseAPI{
                 $n = $p->getName();
                 if(isset($values["nick"])){
                     $n = $values["nick"];
-                    $this->getEssentialsPEPlugin()->getLogger()->info($p->getName() . " is also known as " . $n);
+                    $this->getEssentialsPEPlugin()->getLogger()->info($p->getName() . " who is also known as " . $n);
                     unset($values["nick"]);
                 }
                 $v = BaseSession::$defaults["isVanished"];
@@ -2208,7 +2208,7 @@ class BaseAPI{
         if(($this->updaterTask !== null && $this->updaterTask->isRunning()) && ($this->updaterDownloadTask !== null && $this->updaterDownloadTask->isRunning())){
             return false;
         }
-        $this->getServer()->getLogger()->debug(TextFormat::YELLOW . "Running EssentialsPE's UpdateFetchTask");
+        $this->getServer()->getLogger()->debug(TextFormat::YELLOW . "§9Running EssentialsPE's UpdateFetchTask");
         $this->getServer()->getScheduler()->scheduleAsyncTask($task = new UpdateFetchTask($this->getUpdateBuild(), $install));
         $this->updaterTask = $task;
         return true;

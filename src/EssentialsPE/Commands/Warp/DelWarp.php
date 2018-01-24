@@ -33,15 +33,15 @@ class DelWarp extends BaseCommand{
             return false;
         }
         if(!$this->getAPI()->warpExists($args[0])){
-            $sender->sendMessage(TextFormat::RED . "[Error] Warp doesn't exists");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Warp doesn't exists");
             return false;
         }
         if(!$sender->hasPermission("essentials.warp.override.*") && !$sender->hasPermission("essentials.warp.override.$args[0]")){
-            $sender->sendMessage(TextFormat::RED . "[Error] You can't delete this warp");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2You can't delete this warp");
             return false;
         }
         $this->getAPI()->removeWarp($args[0]);
-        $sender->sendMessage(TextFormat::GREEN . "Warp successfully removed!");
+        $sender->sendMessage(TextFormat::GREEN . "§dWarp successfully removed!");
         return true;
     }
 } 

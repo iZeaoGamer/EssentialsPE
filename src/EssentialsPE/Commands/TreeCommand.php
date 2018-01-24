@@ -38,7 +38,7 @@ class TreeCommand extends BaseCommand{
         }
         $block = $sender->getTargetBlock(100, BaseAPI::NON_SOLID_BLOCKS);
         if($block === null){
-            $sender->sendMessage(TextFormat::RED . "There isn't a reachable block");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2There isn't a reachable block");
             return false;
         }
         switch(strtolower($args[0])){

@@ -32,11 +32,11 @@ class Eco extends BaseCommand{
             case 2:
             case 3:
                 if(!($player = $this->getAPI()->getPlayer($args[1]))){
-                    $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                    $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                     return false;
                 }
                 if((!isset($args[2]) && strtolower($args[0]) !== "reset") || (isset($args[2]) && !is_numeric($args[2]))){
-                    $sender->sendMessage(TextFormat::RED . "[Error] Please specify a" . (isset($args[2]) ? " valid" : "n") . " amount");
+                    $sender->sendMessage(TextFormat::RED . "[Error] §2Please specify a" . (isset($args[2]) ? " valid" : "n") . " amount");
                     return false;
                 }
                 $balance = 0;
@@ -45,15 +45,15 @@ class Eco extends BaseCommand{
                 }
                 switch(strtolower($args[0])){
                     case "give":
-                        $sender->sendMessage(TextFormat::YELLOW . "Adding the balance...");
+                        $sender->sendMessage(TextFormat::YELLOW . "§5Adding the balance...");
                         $this->getAPI()->addToPlayerBalance($player, $balance);
                         break;
                     case "take":
-                        $sender->sendMessage(TextFormat::YELLOW . "Taking the balance...");
+                        $sender->sendMessage(TextFormat::YELLOW . "§5Taking the balance...");
                         $this->getAPI()->addToPlayerBalance($player, -$balance);
                         break;
                     case "set":
-                        $sender->sendMessage(TextFormat::YELLOW . "Setting the balance...");
+                        $sender->sendMessage(TextFormat::YELLOW . "§5Setting the balance...");
                         $this->getAPI()->setPlayerBalance($player, $balance);
                         break;
                     case "reset":

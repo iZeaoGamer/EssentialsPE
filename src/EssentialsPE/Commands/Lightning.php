@@ -35,13 +35,13 @@ class Lightning extends BaseCommand{
         }
         $player = $sender;
         if(isset($args[0]) && !($player = $this->getAPI()->getPlayer($args[0]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
             return false;
         }
         $pos = isset($args[0]) ? $player : $player->getTargetBlock(100);
         $damage = $args[1] ?? 0;
         $this->getAPI()->strikeLightning($pos, $damage);
-        $sender->sendMessage(TextFormat::YELLOW . "Lightning launched!");
+        $sender->sendMessage(TextFormat::YELLOW . "§dLightning launched!");
         return true;
     }
 }

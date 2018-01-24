@@ -39,17 +39,17 @@ class ItemDB extends BaseCommand{
         }
         switch(strtolower($args[0])){
             case "name":
-                $m = TextFormat::AQUA . "This item is named: " . TextFormat::RED . $item->getName();
+                $m = TextFormat::AQUA . "§aThis item is named: " . TextFormat::AQUA . $item->getName();
                 break;
             default:
             case "id":
-                $m = TextFormat::AQUA . "This item ID is: " . TextFormat::RED . $item->getId();
+                $m = TextFormat::AQUA . "§aThis item ID is: " . TextFormat::AQUA . $item->getId();
                 break;
             case "durability":
             case "dura":
             case "metadata":
             case "meta":
-                $m = TextFormat::AQUA . "This item " . ($this->getAPI()->isRepairable($item) ? "has " . TextFormat::RED . $item->getDamage() . TextFormat::AQUA . " points of damage" : "metadata is " . TextFormat::RED . $item->getDamage());
+                $m = TextFormat::AQUA . "§aThis item " . ($this->getAPI()->isRepairable($item) ? "§bhas " . TextFormat::GREEN . $item->getDamage() . TextFormat::AQUA . " §5points of damage" : "§3metadata is " . TextFormat::GREEN . $item->getDamage());
                 break;
         }
         $sender->sendMessage($m);

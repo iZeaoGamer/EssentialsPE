@@ -44,9 +44,9 @@ class God extends BaseCommand{
             }
         }
         $this->getAPI()->switchGodMode($player);
-        $player->sendMessage(TextFormat::AQUA . "God mode " . ($m = $this->getAPI()->isGod($player) ? "enabled" : "disabled"));
+        $player->sendMessage(TextFormat::AQUA . "§dGod mode " . ($m = $this->getAPI()->isGod($player) ? "§5enabled" : "§3disabled"));
         if($player !== $sender){
-            $sender->sendMessage(TextFormat::AQUA . "God mode $m");
+            $sender->sendMessage(TextFormat::AQUA . "§dGod mode $m");
         }
         return true;
     }

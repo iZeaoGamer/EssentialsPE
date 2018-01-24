@@ -46,9 +46,9 @@ class Heal extends BaseCommand{
         }
         $player->heal(new EntityRegainHealthEvent($player, $player->getMaxHealth() - $player->getHealth(), EntityRegainHealthEvent::CAUSE_CUSTOM));
         $player->getLevel()->addParticle(new HeartParticle($player->add(0, 2), 4));
-        $player->sendMessage(TextFormat::GREEN . "You have been healed!");
+        $player->sendMessage(TextFormat::GREEN . "§dYou have been healed!");
         if($player !== $sender){
-            $sender->sendMessage(TextFormat::GREEN . $player->getDisplayName() . " has been healed!");
+            $sender->sendMessage(TextFormat::DARK_PURPLE . $player->getDisplayName() . " §dhas been healed!");
         }
         return true;
     }

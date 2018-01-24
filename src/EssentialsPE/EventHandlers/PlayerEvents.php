@@ -62,9 +62,9 @@ class PlayerEvents extends BaseEventHandler{
         }
         $i = $this->getAPI()->getMutedUntil($event->getPlayer());
         if($i instanceof \DateTime && $event->getPlayer()->hasPermission("essentials.mute.notify")){
-            $event->getPlayer()->sendMessage(TextFormat::YELLOW . "Remember that you're muted until " . TextFormat::AQUA . $i->format("l, F j, Y") . TextFormat::YELLOW . " at " . TextFormat::AQUA . $i->format("h:ia"));
+            $event->getPlayer()->sendMessage(TextFormat::YELLOW . "§aRemember that you're muted until " . TextFormat::AQUA . $i->format("l, F j, Y") . TextFormat::DARK_PURPLE . " at " . TextFormat::DARK_AQUA . $i->format("h:ia"));
         }
-        //$this->getAPI()->setPlayerBalance($event->getPlayer(), $this->getAPI()->getDefaultBalance()); TODO
+        $this->getAPI()->setPlayerBalance($event->getPlayer(), $this->getAPI()->getDefaultBalance());
     }
 
     /**
@@ -182,7 +182,7 @@ class PlayerEvents extends BaseEventHandler{
                 $issuer = $event->getDamager();
                 if($issuer instanceof Player){
                     if(!($s = $this->getAPI()->isPvPEnabled($issuer)) || !$this->getAPI()->isPvPEnabled($victim)){
-                        $issuer->sendMessage(TextFormat::RED . (!$s ? "You have" : $victim->getDisplayName() . " has") . " PvP disabled!");
+                        $issuer->sendMessage(TextFormat::LIGHT_PURPLE . (!$s ? "You have" : $victim->getDisplayName() . " §dhas") . " §dPvP disabled!");
                         $event->setCancelled(true);
                     }
 

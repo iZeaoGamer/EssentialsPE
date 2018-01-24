@@ -33,14 +33,14 @@ class Whois extends BaseCommand{
             return false;
         }
         if(!($player = $this->getAPI()->getPlayer($alias[0]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
             return false;
         }
         $data = $this->getAPI()->getPlayerInformation($player);
         if(!$sender->hasPermission("essentials.geoip.show") || $player->hasPermission("essentials.geoip.hide")){
             unset($data["location"]);
         }
-        $m = TextFormat::AQUA . "Information:\n";
+        $m = TextFormat::AQUA . "§aInformation:\n";
         foreach($data as $k => $v){
             $m .= TextFormat::GRAY . " * " . ucfirst($k) . ": $v";
         }

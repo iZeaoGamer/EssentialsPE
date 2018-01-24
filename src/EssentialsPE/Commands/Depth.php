@@ -33,7 +33,7 @@ class Depth extends BaseCommand{
             $this->sendUsage($sender, $alias);
             return false;
         }
-        $sender->sendMessage(TextFormat::AQUA . "You're " . (($pos = $sender->getFloorY() - 63) === 0 ? "at" : (abs($pos) . " meters " . ($pos > 0 ? "above" : "below"))) . " the sea level.");
+        $sender->sendMessage(TextFormat::AQUA . "§aYou're§b " . (($pos = $sender->getFloorY() - 63) === 0 ? "at" : (abs($pos) . " §ameters " . ($pos > 0 ? "§babove" : "§3elow"))) . " §athe sea level.");
         return true;
     }
 }

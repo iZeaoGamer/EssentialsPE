@@ -63,15 +63,15 @@ class PTime extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }elseif(!($player = $this->getAPI()->getPlayer($args[1]))){
-                $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                 return false;
             }
         }
         if(!$this->getAPI()->setPlayerTime($player, (int) $time)){
-            $sender->sendMessage(TextFormat::RED . "Something went wrong while setting the time");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Something went wrong while setting the time");
             return false;
         }
-        $sender->sendMessage(TextFormat::GREEN . "Setting player time...");
+        $sender->sendMessage(TextFormat::GREEN . "§5Setting player time...");
         return false;
     }
 }

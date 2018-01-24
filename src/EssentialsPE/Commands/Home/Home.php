@@ -35,7 +35,7 @@ class Home extends BaseCommand{
         }
         if(count($args) === 0){
             if(($list = $this->getAPI()->homesList($sender, false)) === false){
-                $sender->sendMessage(TextFormat::AQUA . "§2You don't have any home yet");
+                $sender->sendMessage(TextFormat::AQUA . "§c[Error] §2You don't have any home yet.");
                 return false;
             }
             $sender->sendMessage(TextFormat::AQUA . "§bHere's a list of homes:\n§a" . $list);
@@ -46,7 +46,7 @@ class Home extends BaseCommand{
             return false;
         }
         $sender->teleport($home);
-        $sender->sendMessage(TextFormat::GREEN . "§dTeleporting to home §5" . TextFormat::AQUA . $home->getName() . TextFormat::GREEN . "§dsuccesfully!");
+        $sender->sendMessage(TextFormat::GREEN . "§dTeleporting to home §5" . TextFormat::DARK_PURPLE . $home->getName() . TextFormat::GREEN . "§dsuccesfully!");
         return true;
     }
 } 

@@ -47,11 +47,11 @@ class Compass extends BaseCommand{
                 $direction = "east";
                 break;
             default:
-                $sender->sendMessage(TextFormat::RED . "Oops, there was an error while getting your face direction");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Oops, there was an error while getting your face direction");
                 return false;
                 break;
         }
-        $sender->sendMessage(TextFormat::AQUA . "You're facing " . TextFormat::YELLOW . $direction);
+        $sender->sendMessage(TextFormat::AQUA . "§aYou're facing §b" . TextFormat::LIGHT_BLUE . $direction);
         return true;
     }
 }

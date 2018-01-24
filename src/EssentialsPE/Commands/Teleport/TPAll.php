@@ -41,10 +41,10 @@ class TPAll extends BaseCommand{
         foreach($this->getAPI()->getServer()->getOnlinePlayers() as $p){
             if($p !== $player){
                 $p->teleport($player);
-                $p->sendMessage(TextFormat::YELLOW . "Teleporting to " . $player->getDisplayName() . "...");
+                $p->sendMessage(TextFormat::YELLOW . "§dTeleporting to§5 " . $player->getDisplayName() . "§d...");
             }
         }
-        $player->sendMessage(TextFormat::YELLOW . "Teleporting players to you...");
+        $player->sendMessage(TextFormat::YELLOW . "§dTeleporting players to you...");
         return true;
     }
 } 

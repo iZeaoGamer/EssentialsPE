@@ -33,10 +33,10 @@ class RealName extends BaseCommand{
             return false;
         }
         if(!($player = $this->getAPI()->getPlayer($args[0]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
             return false;
         }
-        $sender->sendMessage(TextFormat::YELLOW .  $player->getDisplayName() . (substr($player->getName(), -1, 1) === "s" ? "'" : "'s") . " realname is: " . TextFormat::RED . $player->getName());
+        $sender->sendMessage(TextFormat::GREEN .  $player->getDisplayName() . (substr($player->getName(), -1, 1) === "s" ? "'" : "'s") . " §brealname is: " . TextFormat::DARK_PURPLE . $player->getName());
         return true;
     }
 }

@@ -32,7 +32,7 @@ class BalanceTop extends BaseCommand{
             $this->sendUsage($sender, $alias);
             return false;
         }
-        $sender->sendMessage(TextFormat::GREEN . " --- Money top list ---");
+        $sender->sendMessage(TextFormat::GREEN . " §b§l--- Money top list ---§r");
         $this->getAPI()->sendBalanceTop($sender);
         return true;
     }

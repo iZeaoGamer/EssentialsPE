@@ -9,7 +9,7 @@ use pocketmine\utils\Config;
 use pocketmine\utils\TextFormat;
 
 class MessagesAPI{
-    const VERSION = "2.0.0";
+    const VERSION = "3.0.0-rewrite";
 
     /** @var Config */
     private $config;

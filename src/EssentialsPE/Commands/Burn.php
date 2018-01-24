@@ -33,15 +33,15 @@ class Burn extends BaseCommand{
             return false;
         }
         if(!($player = $this->getAPI()->getPlayer($args[0]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
             return false;
         }
         if(!is_numeric($time = $args[1])){
-            $sender->sendMessage(TextFormat::RED . "[Error] Invalid burning time");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Invalid burning time");
             return false;
         }
         $player->setOnFire($time);
-        $sender->sendMessage(TextFormat::YELLOW . $player->getDisplayName() . " is now on fire!");
+        $sender->sendMessage(TextFormat::DARK_PURPLE . $player->getDisplayName() . " §dis now on fire!");
         return true;
     }
 }

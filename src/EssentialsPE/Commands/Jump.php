@@ -35,7 +35,7 @@ class Jump extends BaseCommand{
         }
         $block = $sender->getTargetBlock(100, BaseAPI::NON_SOLID_BLOCKS);
         if($block === null){
-            $sender->sendMessage(TextFormat::RED . "There isn't a reachable block");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2There isn't a reachable block");
             return false;
         }
         if(!$sender->getLevel()->getBlock($block->add(0, 2))->isSolid()){

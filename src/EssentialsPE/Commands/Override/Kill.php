@@ -45,7 +45,7 @@ class Kill extends BaseOverrideCommand{
             }
         }
         if($this->getAPI()->isGod($player)){
-            $sender->sendMessage(TextFormat::RED . $args[0] . " can't be killed!");
+            $sender->sendMessage(TextFormat::RED . $args[0] . " §2can't be killed because they're in god mode!");
             return false;
         }
         $sender->getServer()->getPluginManager()->callEvent($ev = new EntityDamageEvent($player, EntityDamageEvent::CAUSE_SUICIDE, $player->getHealth()));
@@ -55,7 +55,7 @@ class Kill extends BaseOverrideCommand{
 
         $player->setLastDamageCause($ev);
         $player->setHealth(0);
-        $player->sendMessage("Ouch. That looks like it hurt.");
+        $player->sendMessage("§aOuch. That's gotta hurt.");
         return true;
     }
 } 

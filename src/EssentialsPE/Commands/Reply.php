@@ -36,18 +36,18 @@ class Reply extends BaseCommand{
             return false;
         }
         if(!($t = $this->getAPI()->getQuickReply($sender))){
-            $sender->sendMessage(TextFormat::RED . "[Error] No target available for QuickReply");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2No target available for QuickReply");
             return false;
         }
         if(strtolower($t) !== "console" && strtolower($t) !== "rcon"){
             if(!($t = $this->getAPI()->getPlayer($t))){
-                $sender->sendMessage(TextFormat::RED . "[Error] No player available for QuickReply");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2No player available for QuickReply");
                 $this->getAPI()->removeQuickReply($sender);
                 return false;
             }
         }
-        $sender->sendMessage(TextFormat::YELLOW . "[me -> " . ($t instanceof Player ? $t->getDisplayName() : $t) . "]" . TextFormat::RESET . " " . implode(" ", $args));
-        $m = TextFormat::YELLOW . "[" . ($sender instanceof Player ? $sender->getDisplayName() : $sender->getName()) . " -> me]" . TextFormat::RESET . " " . implode(" ", $args);
+        $sender->sendMessage(TextFormat::GREEN . "§a[me -> §b" . ($t instanceof Player ? $t->getDisplayName() : $t) . "§5]" . TextFormat::DARK_AQUA . " " . implode(" ", $args));
+        $m = TextFormat::GREEN . "§aMessage from: §5" . ($sender instanceof Player ? $sender->getDisplayName() : $sender->getName()) . " §b-> me]" . TextFormat::DARK_AQUA . " " . implode(" ", $args);
         if($t instanceof Player){
             $t->sendMessage($m);
         }else{

@@ -31,14 +31,14 @@ class Warp extends BaseCommand{
         }
         if(count($args) === 0){
             if(($list = $this->getAPI()->warpList(false)) === false){
-                $sender->sendMessage(TextFormat::AQUA . "There are no Warps currently available");
+                $sender->sendMessage(TextFormat::AQUA . "§5There are no Warps currently available");
                 return false;
             }
-            $sender->sendMessage(TextFormat::AQUA . "Available warps:\n" . $list);
+            $sender->sendMessage(TextFormat::AQUA . "§aHere are the available warps:\n§b" . $list);
             return true;
         }
         if(!($warp = $this->getAPI()->getWarp($args[0]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Warp doesn't exist");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Warp doesn't exist");
             return false;
         }
         if(!isset($args[1]) && !$sender instanceof Player){
@@ -48,21 +48,21 @@ class Warp extends BaseCommand{
         $player = $sender;
         if(isset($args[1])){
             if(!$sender->hasPermission("essentials.warp.other")){
-                $sender->sendMessage(TextFormat::RED . "[Error] You can't teleport other players to that warp");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2You can't teleport other players to that warp");
                 return false;
             }elseif(!($player = $this->getAPI()->getPlayer($args[1]))){
-                $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                 return false;
             }
         }
         if(!$sender->hasPermission("essentials.warps.*") && !$sender->hasPermission("essentials.warps.$args[0]")){
-            $sender->sendMessage(TextFormat::RED . "[Error] You can't teleport to that warp");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2You can't teleport to that warp");
             return false;
         }
         $player->teleport($warp);
-        $player->sendMessage(TextFormat::GREEN . "Warping to " . TextFormat::AQUA . $warp->getName() . TextFormat::GREEN . "...");
+        $player->sendMessage(TextFormat::GREEN . "§dWarping to§5 " . TextFormat::AQUA . $warp->getName() . TextFormat::GREEN . "§d...");
         if($player !== $sender){
-            $sender->sendMessage(TextFormat::GREEN . "Warping " . TextFormat::YELLOW . $player->getDisplayName() . TextFormat::GREEN . " to " . TextFormat::AQUA . $warp->getName() . TextFormat::GREEN . "...");
+            $sender->sendMessage(TextFormat::GREEN . "§dWarping§5 " . TextFormat::YELLOW . $player->getDisplayName() . TextFormat::GREEN . " §dto §5" . TextFormat::DARK_PURPLE . $warp->getName() . TextFormat::GREEN . "§d...");
         }
         return true;
     }

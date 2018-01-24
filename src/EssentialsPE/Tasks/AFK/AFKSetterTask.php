@@ -31,7 +31,7 @@ class AFKSetterTask extends BaseTask{
      * @param int $currentTick
      */
     public function onRun(int $currentTick): void{
-        $this->getAPI()->getServer()->getLogger()->debug(TextFormat::YELLOW . "Running EssentialsPE's AFKSetterTask");
+        $this->getAPI()->getServer()->getLogger()->debug(TextFormat::YELLOW . "§6Running EssentialsPE's AFKSetterTask");
         foreach($this->getAPI()->getServer()->getOnlinePlayers() as $p){
             if(!$this->getAPI()->isAFK($p) && ($last = $this->getAPI()->getLastPlayerMovement($p)) !== null && !$p->hasPermission("essentials.afk.preventauto")){
                 if(time() - $last >= $this->getAPI()->getEssentialsPEPlugin()->getConfig()->getNested("afk.auto-set")){

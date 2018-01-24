@@ -36,10 +36,10 @@ class BreakCommand extends BaseCommand{
             return false;
         }
         if(($block = $sender->getTargetBlock(100, [Block::AIR])) === null){
-            $sender->sendMessage(TextFormat::RED . "There isn't a reachable block");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2There isn't a reachable block");
             return false;
         }elseif($block->getId() === Block::BEDROCK && !$sender->hasPermission("essentials.break.bedrock")){
-            $sender->sendMessage(TextFormat::RED . "You can't break bedrock");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2You can't break bedrock");
             return false;
         }
         $sender->getLevel()->setBlock($block, new Air(), true, true);

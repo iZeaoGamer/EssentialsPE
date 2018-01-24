@@ -50,7 +50,7 @@ class Hat extends BaseCommand{
         if(!$remove){
             $new = $sender->getInventory()->getItemInHand();
             if($new->getId() === Item::AIR){
-                $sender->sendMessage(TextFormat::RED . "[Error] Please specify an item to wear");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Please specify an item to wear");
                 return false;
             }
             $slot = $sender->getInventory()->getHeldItemSlot();
@@ -59,7 +59,7 @@ class Hat extends BaseCommand{
         if($slot !== null){
             $sender->getInventory()->setItem($slot, $old);
         }
-        $sender->sendMessage(TextFormat::AQUA . ($new->getId() === Item::AIR ? "Hat removed!" : "You got a new hat!"));
+        $sender->sendMessage(TextFormat::AQUA . ($new->getId() === Item::AIR ? "§dHat removed!" : "§dYou got a new hat!"));
         return true;
     }
 }

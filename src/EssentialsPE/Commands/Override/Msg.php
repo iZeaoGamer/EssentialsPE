@@ -42,8 +42,8 @@ class Msg extends BaseOverrideCommand{
                 return false;
             }
         }
-        $sender->sendMessage(TextFormat::YELLOW . "[me -> " . ($t instanceof Player ? $t->getDisplayName() : $t) . "]" . TextFormat::RESET . " " . implode(" ", $args));
-        $m = TextFormat::YELLOW . "[" . ($sender instanceof Player ? $sender->getDisplayName() : $sender->getName()) . " -> me]" . TextFormat::RESET . " " . implode(" ", $args);
+        $sender->sendMessage(TextFormat::YELLOW . "§a[me -> §b" . ($t instanceof Player ? $t->getDisplayName() : $t) . "§a]" . TextFormat::LIGHT_PURPLE . " " . implode(" ", $args));
+        $m = TextFormat::YELLOW . "§aMessage from:§b" . ($sender instanceof Player ? $sender->getDisplayName() : $sender->getName()) . " §a-> me]" . TextFormat::LIGHT_PURPLE . " " . implode(" ", $args);
         if($t instanceof Player){
             $t->sendMessage($m);
         }else{

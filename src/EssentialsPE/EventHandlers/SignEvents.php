@@ -67,7 +67,7 @@ class SignEvents extends BaseEventHandler{
                     }elseif($v === "spectator"){
                         $event->getPlayer()->setGamemode(3);
                     }
-                    $event->getPlayer()->sendMessage(TextFormat::GREEN . "Your gamemode has been set to " . $event->getPlayer()->getServer()->getGamemodeString($event->getPlayer()->getGamemode()) . TextFormat::GREEN . ($price ? " for " . $this->getAPI()->getCurrencySymbol() . $price : null));
+                    $event->getPlayer()->sendMessage(TextFormat::GREEN . "§dYour gamemode has been set to §5" . $event->getPlayer()->getServer()->getGamemodeString($event->getPlayer()->getGamemode()) . TextFormat::GREEN . ($price ? " §dfor §5" . $this->getAPI()->getCurrencySymbol() . $price : null));
                 }
             }
 
@@ -77,20 +77,20 @@ class SignEvents extends BaseEventHandler{
                 if(!$event->getPlayer()->hasPermission("essentials.sign.use.heal")){
                     $event->getPlayer()->sendMessage(TextFormat::RED . "You don't have permissions to use this sign");
                 }elseif($event->getPlayer()->getGamemode() === 1 || $event->getPlayer()->getGamemode() === 3){
-                    $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] You're in " . $event->getPlayer()->getServer()->getGamemodeString($event->getPlayer()->getGamemode()) . " mode");
+                    $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] §2You're in " . $event->getPlayer()->getServer()->getGamemodeString($event->getPlayer()->getGamemode()) . " mode");
                     return;
                }else{
                     $price = substr($tile->getText()[1], 7);
                     if($price !== false && is_numeric($price)) {
                         if(!$this->getAPI()->hasPlayerBalance($event->getPlayer(), $price)) {
-                            $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] You don't have enough money to use this sign");
+                            $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] §2You don't have enough money to use this sign");
                             return;
                         } else {
                             $this->getAPI()->addToPlayerBalance($event->getPlayer(), -$price);
                         }
                     }
                     $event->getPlayer()->heal(new EntityRegainHealthEvent($event->getPlayer(), $event->getPlayer()->getMaxHealth(), EntityRegainHealthEvent::CAUSE_CUSTOM));
-                    $event->getPlayer()->sendMessage(TextFormat::GREEN . "You have been healed" . TextFormat::GREEN . ($price ? " for " . $this->getAPI()->getCurrencySymbol() . $price : null));
+                    $event->getPlayer()->sendMessage(TextFormat::GREEN . "§dYou have been healed" . TextFormat::GREEN . ($price ? " for " . $this->getAPI()->getCurrencySymbol() . $price : null));
                 }
             }
             
@@ -104,16 +104,16 @@ class SignEvents extends BaseEventHandler{
                     return;
                 }else{
                     if(!($kit = $this->getAPI()->getKit($tile->getText()[1]))){
-                        $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] Kit doesn't exists");
+                        $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] §2Kit doesn't exists");
                         return;
                     }elseif(!$event->getPlayer()->hasPermission("essentials.kits." . $kit->getName())){
-                        $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] You don't have permissions to get this kit");
+                        $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] §2You don't have permissions to get this kit");
                         return;
                     }else{
                         $price = substr($tile->getText()[2], 7);
                         if($price !== false && is_numeric($price)) {
                             if(!$this->getAPI()->hasPlayerBalance($event->getPlayer(), $price)) {
-                                $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] You don't have enough money to use this sign");
+                                $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] §2You don't have enough money to use this sign");
                                 return;
                             }
 	                        $this->getAPI()->addToPlayerBalance($event->getPlayer(), -$price);
@@ -130,7 +130,7 @@ class SignEvents extends BaseEventHandler{
                 if(!$event->getPlayer()->hasPermission("essentials.sign.use.repair")){
                     $event->getPlayer()->sendMessage(TextFormat::RED . "You don't have permissions to use this sign");
                 }elseif($event->getPlayer()->getGamemode() === 1 || $event->getPlayer()->getGamemode() === 3){
-                    $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] You're in " . $event->getPlayer()->getServer()->getGamemodeString($event->getPlayer()->getGamemode()) . " mode");
+                    $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] §2You're in " . $event->getPlayer()->getServer()->getGamemodeString($event->getPlayer()->getGamemode()) . " mode");
                     return;
                }else{
                     if(($v = $tile->getText()[1]) === "Hand"){
@@ -138,7 +138,7 @@ class SignEvents extends BaseEventHandler{
                         if($price !== false && is_numeric($price)) {
                         	$price = (int) $price;
                             if(!$this->getAPI()->hasPlayerBalance($event->getPlayer(), $price)) {
-                                $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] You don't have enough money to use this sign");
+                                $event->getPlayer()->sendMessage(TextFormat::RED . "[Error] §2You don't have enough money to use this sign");
                                 return;
                             } else {
                                 $this->getAPI()->addToPlayerBalance($event->getPlayer(), -$price);
@@ -146,7 +146,7 @@ class SignEvents extends BaseEventHandler{
                         }
                         if($this->getAPI()->isRepairable($item = $event->getPlayer()->getInventory()->getItemInHand())){
                             $item->setDamage(0);
-                            $event->getPlayer()->sendMessage(TextFormat::GREEN . "Item successfully repaired" . TextFormat::GREEN . ($price ? " for " . $this->getAPI()->getCurrencySymbol() . $price : null));
+                            $event->getPlayer()->sendMessage(TextFormat::GREEN . "§dItem successfully repaired" . TextFormat::GREEN . ($price ? " for " . $this->getAPI()->getCurrencySymbol() . $price : null));
                         }
                     }elseif($v === "All"){
                         $price = substr($tile->getText()[2], 7);

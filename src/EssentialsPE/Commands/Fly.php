@@ -39,14 +39,14 @@ class Fly extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }elseif(!($player = $this->getAPI()->getPlayer($args[0]))){
-                $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                 return false;
             }
         }
         $this->getAPI()->switchCanFly($player);
-        $player->sendMessage(TextFormat::YELLOW . "Flying mode " . ($this->getAPI()->canFly($player) ? "enabled" : "disabled") . "!");
+        $player->sendMessage(TextFormat::YELLOW . "§dFlying mode " . ($this->getAPI()->canFly($player) ? "§5enabled" : "§3disabled") . "!");
         if($player !== $sender){
-            $sender->sendMessage(TextFormat::YELLOW . "Flying mode " . ($this->getAPI()->canFly($player) ? "enabled" : "disabled") . " for " . $player->getDisplayName());
+            $sender->sendMessage(TextFormat::YELLOW . "§bFlying mode " . ($this->getAPI()->canFly($player) ? "§5enabled" : "§3disabled") . " §dfor §5" . $player->getDisplayName());
         }
         return true;
     }

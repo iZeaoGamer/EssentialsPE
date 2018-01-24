@@ -34,13 +34,13 @@ class SetWorth extends BaseCommand{
             $this->sendUsage($sender, $alias);
             return false;
         }elseif(!is_numeric($args[0]) || (int) $args[0] < 0){
-            $sender->sendMessage(TextFormat::RED . "[Error] Please provide a valid worth");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Please provide a valid worth");
             return false;
         }elseif(($id = $sender->getInventory()->getItemInHand()->getId()) === Item::AIR){
-            $sender->sendMessage(TextFormat::RED . "[Error] Please provide a valid item");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Please provide a valid item");
             return false;
         }
-        $sender->sendMessage(TextFormat::YELLOW . "Setting worth...");
+        $sender->sendMessage(TextFormat::YELLOW . "§5Setting worth...");
         $this->getAPI()->setItemWorth($id, (int) $args[0]);
         return true;
     }

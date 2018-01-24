@@ -34,21 +34,21 @@ class World extends BaseCommand{
             return false;
         }
         if(!$sender->hasPermission("essentials.worlds.*") && !$sender->hasPermission("essentials.worlds." . strtolower($args[0]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] You can't teleport to this world.");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2You can't teleport to this world.");
             return false;
         }
         if(!$sender->getServer()->isLevelGenerated($args[0])){
-            $sender->sendMessage(TextFormat::RED . "[Error] World doesn't exist");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2World doesn't exist");
             return false;
         }elseif(!$sender->getServer()->isLevelLoaded($args[0])){
-            $sender->sendMessage(TextFormat::YELLOW . "Level is not loaded yet. Loading...");
+            $sender->sendMessage(TextFormat::YELLOW . "§5Level is not loaded yet. Loading...");
             if(!$sender->getServer()->loadLevel($args[0])){
-                $sender->sendMessage(TextFormat::RED . "[Error] The level couldn't be loaded");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2The level couldn't be loaded");
                 return false;
             }
         }
         $sender->teleport($this->getAPI()->getServer()->getLevelByName($args[0])->getSpawnLocation(), 0, 0);
-        $sender->sendMessage(TextFormat::YELLOW . "Teleporting...");
+        $sender->sendMessage(TextFormat::YELLOW . "§dTeleporting to the worls succesfully...");
         return true;
     }
 } 

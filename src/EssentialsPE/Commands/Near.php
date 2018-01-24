@@ -39,15 +39,15 @@ class Near extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }elseif(!($player = $this->getAPI()->getPlayer($args[0]))){
-                $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                 return false;
             }
         }
         $who = $player === $sender ? "you" : $player->getDisplayName();
         if(count($near = $this->getAPI()->getNearPlayers($player)) < 1){
-            $m = TextFormat::GRAY . "** There are no players near to " . $who . TextFormat::GRAY . "! **";
+            $m = TextFormat::GRAY . "§2** There are currently no players near to§3 " . $who . TextFormat::GRAY . "§2! **";
         }else{
-            $m = TextFormat::YELLOW . "** There " . (count($near) > 1 ? "are " : "is ") . TextFormat::AQUA . count($near) . TextFormat::YELLOW . "player" . (count($near) > 1 ? "s " : " ") . "near to " . $who . TextFormat::YELLOW . ":";
+            $m = TextFormat::YELLOW . "§a** There " . (count($near) > 1 ? "§5are " : "§3is ") . TextFormat::AQUA . count($near) . TextFormat::DARK_PURPLE . "player" . (count($near) > 1 ? "s " : " ") . "§anear to §d" . $who . TextFormat::AQUA . ":";
             foreach($near as $p){
                 $m .= TextFormat::YELLOW . "\n* " . TextFormat::RESET . $p->getDisplayName();
             }

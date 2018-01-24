@@ -34,11 +34,11 @@ class Seen extends BaseCommand{
             return false;
         }
         if(($player = $this->getAPI()->getOfflinePlayer($args[0])) instanceof Player){
-            $sender->sendMessage(TextFormat::GREEN . $player->getDisplayName() . " is online!");
+            $sender->sendMessage(TextFormat::GREEN . $player->getDisplayName() . " §bis online!");
             return true;
         }
         if(!is_numeric($player->getLastPlayed())){
-            $sender->sendMessage(TextFormat::RED .  $args[0] . " has never played on this server.");
+            $sender->sendMessage(TextFormat::RED .  $args[0] . " §6has never played on this server before.");
             return false;
         }
         /**
@@ -50,7 +50,7 @@ class Seen extends BaseCommand{
          * F = Month name
          * Y = Year in 4 digits (1999)
          */
-        $sender->sendMessage(TextFormat::AQUA .  $player->getName() ." was last seen on " . TextFormat::RED . date("l, F j, Y", ($t = $player->getLastPlayed() / 1000)) . TextFormat::AQUA . " at " . TextFormat::RED . date("h:ia", $t));
+        $sender->sendMessage(TextFormat::GREEN .  $player->getName() ." §bwas last seen on " . TextFormat::DARK_AQUA . date("l, F j, Y", ($t = $player->getLastPlayed() / 1000)) . TextFormat::AQUA . " §aat " . TextFormat::DARK_PURPLE . date("h:ia", $t));
         return true;
     }
 }

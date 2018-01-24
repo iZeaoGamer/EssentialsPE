@@ -39,18 +39,18 @@ class Unlimited extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }elseif(!($player = $this->getAPI()->getPlayer($args[0]))){
-                $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                 return false;
             }
         }
         if(($gm = $player->getGamemode()) === Player::CREATIVE || $gm === Player::SPECTATOR){
-            $sender->sendMessage(TextFormat::RED . "[Error] " . ($player === $sender ? "you are" : $player->getDisplayName() . " is") . " in " . $this->getAPI()->getServer()->getGamemodeString($gm) . " mode");
+            $sender->sendMessage(TextFormat::RED . "[Error] " . ($player === $sender ? "§2you are§3" : $player->getDisplayName() . " §5is") . " §3in §5" . $this->getAPI()->getServer()->getGamemodeString($gm) . " §2mode");
             return false;
         }
         $this->getAPI()->switchUnlimited($player);
-        $player->sendMessage(TextFormat::GREEN . "Unlimited placing of blocks " . ($s = $this->getAPI()->isUnlimitedEnabled($player) ? "enabled" : "disabled"));
+        $player->sendMessage(TextFormat::GREEN . "§dUnlimited placing of blocks " . ($s = $this->getAPI()->isUnlimitedEnabled($player) ? "§5enabled" : "§3disabled"));
         if($player !== $sender){
-            $sender->sendMessage(TextFormat::GREEN . "Unlimited placing of blocks $s");
+            $sender->sendMessage(TextFormat::GREEN . "§dUnlimited placing of blocks $s");
         }
         return true;
     }

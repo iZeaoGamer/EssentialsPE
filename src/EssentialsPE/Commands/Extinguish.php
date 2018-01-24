@@ -39,12 +39,12 @@ class Extinguish extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }elseif(!($player = $this->getAPI()->getPlayer($args[0]))){
-                $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
                 return false;
             }
         }
         $player->extinguish();
-        $sender->sendMessage(TextFormat::AQUA . ($player === $sender ? "You were" : $player->getDisplayName() . "has been") . TextFormat::AQUA . " extinguished");
+        $sender->sendMessage(TextFormat::AQUA . ($player === $sender ? "§dYou were§5" : $player->getDisplayName() . "§dhas been") . TextFormat::AQUA . " §dextinguished");
         return true;
     }
 }

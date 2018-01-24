@@ -34,10 +34,10 @@ class Back extends BaseCommand{
             return false;
         }
         if(!($pos = $this->getAPI()->getLastPlayerPosition($sender))){
-            $sender->sendMessage(TextFormat::RED . "[Error] No previous position available");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2No previous position available");
             return false;
         }
-        $sender->sendMessage(TextFormat::GREEN . "Teleporting...");
+        $sender->sendMessage(TextFormat::GREEN . "§dTeleporting to your last location.");
         $sender->teleport($pos);
         return true;
     }

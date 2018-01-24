@@ -35,7 +35,7 @@ class ItemCommand extends BaseCommand{
             return false;
         }
         if(($gm = $sender->getGamemode()) === Player::SPECTATOR){
-            $sender->sendMessage(TextFormat::RED . "[Error] You're in " . $this->getAPI()->getServer()->getGamemodeString($gm) . " mode");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2You're in §3" . $this->getAPI()->getServer()->getGamemodeString($gm) . " §2mode");
             return false;
         }
 
@@ -43,10 +43,10 @@ class ItemCommand extends BaseCommand{
         $item = $this->getAPI()->getItem($item_name = array_shift($args));
 
         if($item->getId() === Item::AIR){
-            $sender->sendMessage(TextFormat::RED . "Unknown item \"" . $item_name . "\"");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Unknown item \"" . $item_name . "\"");
             return false;
         }elseif(!$sender->hasPermission("essentials.itemspawn.item-all") && !$sender->hasPermission("essentials.itemspawn.item-" . $item->getName() && !$sender->hasPermission("essentials.itemspawn.item-" . $item->getId()))){
-            $sender->sendMessage(TextFormat::RED . "You can't spawn this item");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2You can't spawn this item");
             return false;
         }
 
@@ -65,7 +65,7 @@ class ItemCommand extends BaseCommand{
 
         //Giving the item...
         $sender->getInventory()->setItem($sender->getInventory()->firstEmpty(), $item);
-        $sender->sendMessage(TextFormat::YELLOW . "Giving " . TextFormat::RED . $item->getCount() . TextFormat::YELLOW . " of " . TextFormat::RED . ($item->getName() === "Unknown" ? $item_name : $item->getName()));
+        $sender->sendMessage(TextFormat::YELLOW . "§dGiving " . TextFormat::DARK_PURPLE . $item->getCount() . TextFormat::YELLOW . " §dof " . TextFormat::DARK_PURPLE . ($item->getName() === "§dUnknown§5" ? $item_name : $item->getName()));
         return false;
     }
 }

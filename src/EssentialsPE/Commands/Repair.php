@@ -51,22 +51,22 @@ class Repair extends BaseCommand{
                     $item->setDamage(0);
                 }
             }
-            $m = TextFormat::GREEN . "All the tools in your inventory were repaired!";
+            $m = TextFormat::GREEN . "§dAll the tools in your inventory were repaired!";
             if($sender->hasPermission("essentials.repair.armor")){
                 foreach($sender->getInventory()->getArmorContents() as $item){
                     if($this->getAPI()->isRepairable($item)){
                         $item->setDamage(0);
                     }
                 }
-                $m .= TextFormat::AQUA . " (Including the equipped Armor)";
+                $m .= TextFormat::AQUA . " §d(Including the equipped Armor)";
             }
         }else{
             if(!$this->getAPI()->isRepairable($sender->getInventory()->getItemInHand())){
-                $sender->sendMessage(TextFormat::RED . "[Error] This item can't be repaired!");
+                $sender->sendMessage(TextFormat::RED . "[Error] §2This item can't be repaired!");
                 return false;
             }
             $sender->getInventory()->getItemInHand()->setDamage(0);
-            $m = TextFormat::GREEN . "Item successfully repaired!";
+            $m = TextFormat::GREEN . "§dItem successfully repaired!";
         }
         $sender->sendMessage($m);
         return true;

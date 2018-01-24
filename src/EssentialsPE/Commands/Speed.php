@@ -34,12 +34,12 @@ class Speed extends BaseCommand{
             return false;
         }
         if(!is_numeric($args[0])){
-            $sender->sendMessage(TextFormat::RED . "[Error] Please provide a valid value");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Please provide a valid value");
             return false;
         }
         $player = $sender;
         if(isset($args[1]) && !($player = $this->getAPI()->getPlayer($args[1]))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Player not found");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found");
             return false;
         }
         if((int) $args[0] === 0){
@@ -50,7 +50,7 @@ class Speed extends BaseCommand{
             $effect->setDuration(PHP_INT_MAX);
             $player->addEffect($effect);
         }
-        $sender->sendMessage(TextFormat::YELLOW . "Speed amplified by " . TextFormat::WHITE . $args[0]);
+        $sender->sendMessage(TextFormat::YELLOW . "§dSpeed amplified by " . TextFormat::DARK_PURPLE . $args[0]);
         return true;
     }
 }

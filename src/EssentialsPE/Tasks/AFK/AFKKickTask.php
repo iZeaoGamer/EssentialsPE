@@ -27,9 +27,9 @@ class AFKKickTask extends BaseTask{
      */
     public function onRun(int $currentTick): void{
         // TODO: Remember access to API for tasks...
-        $this->getAPI()->getServer()->getLogger()->debug(TextFormat::YELLOW . "Running EssentialsPE's AFKKickTask");
+        $this->getAPI()->getServer()->getLogger()->debug(TextFormat::YELLOW . "§6Running EssentialsPE's AFKKickTask");
         if($this->player instanceof Player && $this->player->isOnline() && $this->getAPI()->isAFK($this->player) && !$this->player->hasPermission("essentials.afk.kickexempt") && time() - $this->getAPI()->getLastPlayerMovement($this->player) >= $this->getAPI()->getEssentialsPEPlugin()->getConfig()->getNested("afk.auto-set")){
-            $this->player->kick("You have been kicked for idling more than " . (($time = floor($this->getAPI()->getEssentialsPEPlugin()->getConfig()->getNested("afk.auto-kick"))) / 60 >= 1 ? ($time / 60) . " minutes" : $time . " seconds"), false);
+            $this->player->kick("§bYou have been kicked for idling more than §3" . (($time = floor($this->getAPI()->getEssentialsPEPlugin()->getConfig()->getNested("afk.auto-kick"))) / 60 >= 1 ? ($time / 60) . " minutes" : $time . " seconds"), false);
         }
     }
 } 

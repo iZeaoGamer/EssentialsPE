@@ -31,7 +31,7 @@ class EssentialsPE extends BaseCommand{
         }
         switch(count($args)){
             case 0:
-                $sender->sendMessage(TextFormat::YELLOW . "You're using " . TextFormat::AQUA . "EssentialsPE " . TextFormat::YELLOW . "v" . TextFormat::GREEN . $sender->getServer()->getPluginManager()->getPlugin("EssentialsPE")->getDescription()->getVersion());
+                $sender->sendMessage(TextFormat::YELLOW . "§aYou're using§b " . TextFormat::AQUA . "§bEssentialsPE " . TextFormat::YELLOW . "§6v" . TextFormat::GOLD . $sender->getServer()->getPluginManager()->getPlugin("EssentialsPE")->getDescription()->getVersion());
                 break;
             case 1:
             case 2:
@@ -39,20 +39,20 @@ class EssentialsPE extends BaseCommand{
                     case "update":
                     case "u":
                         if(!$sender->hasPermission("essentials.update.use")){
-                            $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
+                            $sender->sendMessage(TextFormat::DARK_RED . $this->getPermissionMessage());
                             return false;
                         }
                         if(isset($args[1]) && (($a = strtolower($args[1])) === "check" || $a === "c" || $a === "install" || $a === "i")){
                             if(!$this->getAPI()->fetchEssentialsPEUpdate($a[0] === "i")){
-                                $sender->sendMessage(TextFormat::YELLOW . "The updater is already working... Please wait a few moments and try again");
+                                $sender->sendMessage(TextFormat::YELLOW . "§5The updater is already working... Please wait a few moments and try again");
                             }
                             return true;
                         }
-                        $sender->sendMessage(TextFormat::RED . ($sender instanceof Player ? "" : "Usage: ") . "/essentialspe update <check|install>");
+                        $sender->sendMessage(TextFormat::RED . ($sender instanceof Player ? "" : "§aPlease use: §b") . "/essentialspe update <check|install>");
                         break;
                     case "version":
                     case "v":
-                        $sender->sendMessage(TextFormat::YELLOW . "You're using " . TextFormat::AQUA . "EssentialsPE " . TextFormat::YELLOW . "v" . TextFormat::GREEN . $sender->getServer()->getPluginManager()->getPlugin("EssentialsPE")->getDescription()->getVersion());
+                        $sender->sendMessage(TextFormat::YELLOW . "§aYou're using §b" . TextFormat::AQUA . "§bEssentialsPE " . TextFormat::YELLOW . "§6v" . TextFormat::GOLD . $sender->getServer()->getPluginManager()->getPlugin("EssentialsPE")->getDescription()->getVersion());
                         break;
                     default:
                         $this->sendUsage($sender, $alias);

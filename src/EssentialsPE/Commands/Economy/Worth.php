@@ -39,10 +39,10 @@ class Worth extends BaseCommand{
             $id = $this->getAPI()->getItem($args[0])->getId();
         }
         if(!($worth = $this->getAPI()->getItemWorth($id))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Worth not available for this item");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Worth not available for this item");
             return false;
         }
-        $sender->sendMessage(TextFormat::AQUA . "Item's worth is " . $this->getAPI()->getCurrencySymbol() . $worth);
+        $sender->sendMessage(TextFormat::AQUA . "§aItem's worth is§b " . $this->getAPI()->getCurrencySymbol() . $worth);
         return true;
     }
 }

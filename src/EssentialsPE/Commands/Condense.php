@@ -47,16 +47,16 @@ class Condense extends BaseCommand{
             default: // Item name|id
                 $target = $this->getAPI()->getItem($args[0]);
                 if($target->getId() === 0){
-                    $sender->sendMessage(TextFormat::RED . "Unknown item \"" . $args[0] . "\"");
+                    $sender->sendMessage(TextFormat::RED . "[Error] §2Unknown item \"" . $args[0] . "\"");
                     return false;
                 }
                 break;
         }
         if(!$this->getAPI()->condenseItems($sender->getInventory(), $target)){
-            $sender->sendMessage(TextFormat::RED . "[Error] This item can't be condensed");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2This item can't be condensed");
             return false;
         }
-        $sender->sendMessage(TextFormat::YELLOW . "Condensing items...");
+        $sender->sendMessage(TextFormat::YELLOW . "§5Condensing items...");
         return true;
     }
 }

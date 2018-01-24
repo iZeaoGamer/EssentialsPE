@@ -33,11 +33,11 @@ class Mute extends BaseCommand{
             return false;
         }
         if(!($player = $this->getAPI()->getPlayer(array_shift($args)))){
-            $sender->sendMessage(TextFormat::RED . "[Error] Player not found.");
+            $sender->sendMessage(TextFormat::RED . "[Error] §2Player not found.");
             return false;
         }
         if($player->hasPermission("essentials.mute.exempt") && !$this->getAPI()->isMuted($player)){
-            $sender->sendMessage(TextFormat::RED . $player->getDisplayName() . " can't be muted");
+            $sender->sendMessage(TextFormat::RED . $player->getDisplayName() . " §2can't be muted because they either the permission: essentials.mute.exempt or because they're OP.");
             return false;
         }
         /** @var \DateTime $date */
@@ -46,7 +46,7 @@ class Mute extends BaseCommand{
             $date = $info[0];
         }
         $this->getAPI()->switchMute($player, $date, true);
-        $sender->sendMessage(TextFormat::YELLOW . $player->getDisplayName() . " has been " . ($this->getAPI()->isMuted($player) ? "muted " . ($date !== null ? "until: " . TextFormat::AQUA . $date->format("l, F j, Y") . TextFormat::RED . " at " . TextFormat::AQUA . $date->format("h:ia") : TextFormat::AQUA . "Forever" . TextFormat::YELLOW . "!") : "unmuted!"));
+        $sender->sendMessage(TextFormat::GREEN . $player->getDisplayName() . " §6has been " . ($this->getAPI()->isMuted($player) ? "§3muted " . ($date !== null ? "§6until: " . TextFormat::AQUA . $date->format("l, F j, Y") . TextFormat::RED . " §aat " . TextFormat::AQUA . $date->format("h:ia") : TextFormat::AQUA . "§5Forever" . TextFormat::YELLOW . "!") : "§dunmuted!"));
         return true;
     }
 }

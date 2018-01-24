@@ -38,8 +38,8 @@ class TPHere extends BaseCommand{
             return false;
         }
         $player->teleport($sender);
-        $player->sendMessage(TextFormat::YELLOW . "Teleporting to " . $sender->getDisplayName() . "...");
-        $sender->sendMessage(TextFormat::YELLOW . "Teleporting " . $player->getDisplayName() . " to you...");
+        $player->sendMessage(TextFormat::YELLOW . "§dTeleporting to §5" . $sender->getDisplayName() . "§d...");
+        $sender->sendMessage(TextFormat::YELLOW . "§dTeleporting §5" . $player->getDisplayName() . " §dto you...");
         return true;
     }
 } 
