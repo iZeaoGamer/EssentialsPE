@@ -141,7 +141,7 @@ class Loader extends PluginBase{
             new AFK($this->getAPI()),
             new Antioch($this->getAPI()),
             new Back($this->getAPI()),
-            //new BigTreeCommand($this->getAPI()), TODO
+            new BigTreeCommand($this->getAPI()),
             new BreakCommand($this->getAPI()),
             new Broadcast($this->getAPI()),
             new Burn($this->getAPI()),
