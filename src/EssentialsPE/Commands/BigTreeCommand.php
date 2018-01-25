@@ -39,9 +39,9 @@ class BigTreeCommand extends BaseCommand{
             $this->sendUsage($sender, $alias);
             return false;
         }
-        #$transparent = [];
+        $transparent = [];
         $block = $sender->getTargetBlock(100, BaseAPI::NON_SOLID_BLOCKS);
-        /*while(!$block->isSolid){
+        (!$block->isSolid){
             if($block === null){
                 break;
             }
