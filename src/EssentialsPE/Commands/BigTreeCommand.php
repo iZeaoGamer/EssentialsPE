@@ -1,9 +1,6 @@
 <?php
-
 declare(strict_types = 1);
-
 namespace EssentialsPE\Commands;
-
 use EssentialsPE\BaseFiles\BaseAPI;
 use EssentialsPE\BaseFiles\BaseCommand;
 use pocketmine\block\Sapling;
@@ -11,7 +8,6 @@ use pocketmine\command\CommandSender;
 use pocketmine\level\generator\object\BigTree;
 use pocketmine\Player;
 use pocketmine\utils\TextFormat;
-
 class BigTreeCommand extends BaseCommand{
     /**
      * @param BaseAPI $api
@@ -20,7 +16,6 @@ class BigTreeCommand extends BaseCommand{
         parent::__construct($api, "bigtree", "Spawns a big tree", "<tree|redwood|jungle>", false);
         $this->setPermission("essentials.bigtree");
     }
-
     /**
      * @param CommandSender $sender
      * @param string $alias
@@ -39,16 +34,15 @@ class BigTreeCommand extends BaseCommand{
             $this->sendUsage($sender, $alias);
             return false;
         }
-        $transparent = [];
+        #$transparent = [];
         $block = $sender->getTargetBlock(100, BaseAPI::NON_SOLID_BLOCKS);
-        }
-        ($block->isSolid){
-        /*while($block === null){
-            break;
-        }
+        /*while(!$block->isSolid){
+            if($block === null){
+                break;
+            }
             $transparent[] = $block->getID();
             $block = $sender->getTargetBlock(100, $transparent);
-        }
+        }*/
         if($block === null){
             $sender->sendMessage(TextFormat::RED . "[Error] §2There isn't a reachable block");
             return false;
