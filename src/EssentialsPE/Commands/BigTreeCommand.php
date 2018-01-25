@@ -41,13 +41,14 @@ class BigTreeCommand extends BaseCommand{
         }
         $transparent = [];
         $block = $sender->getTargetBlock(100, BaseAPI::NON_SOLID_BLOCKS);
-        (!$block->isSolid){
-            if($block === null){
-                break;
-            }
+        }
+        ($block->isSolid){
+        /*while($block === null){
+            break;
+        }
             $transparent[] = $block->getID();
             $block = $sender->getTargetBlock(100, $transparent);
-        }*/
+        }
         if($block === null){
             $sender->sendMessage(TextFormat::RED . "[Error] §2There isn't a reachable block");
             return false;
