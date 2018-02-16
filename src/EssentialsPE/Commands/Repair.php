@@ -49,6 +49,7 @@ class Repair extends BaseCommand{
             foreach($sender->getInventory()->getContents() as $item){
                 if($this->getAPI()->isRepairable($item)){
                     $item->setDamage(0);
+                    $sender->getInventory()->setItemInHand($item);
                 }
             }
             $m = TextFormat::GREEN . "§dAll the tools in your inventory were repaired!";
@@ -56,6 +57,7 @@ class Repair extends BaseCommand{
                 foreach($sender->getInventory()->getContents() as $item){
                     if($this->getAPI()->isRepairable($item)){
                         $item->setDamage(0);
+                        $sender->getInventory()->setItemInHand($item);
                     }
                 }
                 $m .= TextFormat::AQUA . " §d(Including the equipped Armor)";
