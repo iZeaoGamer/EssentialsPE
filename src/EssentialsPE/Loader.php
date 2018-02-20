@@ -8,7 +8,6 @@ use EssentialsPE\BaseFiles\BaseAPI;
 use EssentialsPE\BaseFiles\BaseCommand;
 use EssentialsPE\Commands\AFK;
 use EssentialsPE\Commands\Antioch;
-use EssentialsPE\Commands\Back;
 use EssentialsPE\Commands\BreakCommand;
 use EssentialsPE\Commands\BigTreeCommand;
 use EssentialsPE\Commands\Broadcast;
@@ -143,7 +142,6 @@ class Loader extends PluginBase{
         $commands = [
             new AFK($this->getAPI()),
             new Antioch($this->getAPI()),
-            new Back($this->getAPI()),
             new BigTreeCommand($this->getAPI()),
             new BreakCommand($this->getAPI()),
             new Broadcast($this->getAPI()),
