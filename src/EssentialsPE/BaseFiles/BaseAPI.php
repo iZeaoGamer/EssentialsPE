@@ -343,7 +343,7 @@ class BaseAPI{
             }
         }
     }
-
+   
     /**  ____             _
      *  |  _ \           | |
      *  | |_) | __ _  ___| | __
@@ -357,7 +357,7 @@ class BaseAPI{
      *
      * @param Player $player
      * @return null|Location
-     */
+     *//*
     public function getLastPlayerPosition(Player $player): ?Location{
         return $this->getSession($player)->getLastPosition();
     }
@@ -367,7 +367,7 @@ class BaseAPI{
      *
      * @param Player $player
      * @param Location $pos
-     */
+     
     public function setPlayerLastPosition(Player $player, Location $pos): void{
         $this->getSession($player)->setLastPosition($pos);
     }
