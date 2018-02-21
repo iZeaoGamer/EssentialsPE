@@ -46,7 +46,7 @@ class Home extends BaseCommand{
             return false;
         }
         $sender->teleport($home);
-        $sender->sendMessage(TextFormat::GREEN . "§dTeleporting to home §5" . TextFormat::DARK_PURPLE . $home->getName() . TextFormat::GREEN . "§dsuccesfully!");
+        $sender->sendMessage(TextFormat::GREEN . "§dTeleporting to home §5" . TextFormat::DARK_PURPLE . $home->getName() . TextFormat::GREEN . " §dsuccesfully!");
         return true;
     }
 } 
