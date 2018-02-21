@@ -55,7 +55,7 @@ class Warp extends BaseCommand{
                 return false;
             }
         }
-        if(!$sender->hasPermission("essentials.warps.*") && !$sender->hasPermission("essentials.warps.$args[0]")){
+        if(!$sender->hasPermission("essentials.warp.use") && !$sender->hasPermission("essentials.warps.$args[0]")){
             $sender->sendMessage(TextFormat::RED . "[Error] §2You can't teleport to that warp");
             return false;
         }
