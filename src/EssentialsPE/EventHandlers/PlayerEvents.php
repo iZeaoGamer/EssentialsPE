@@ -8,11 +8,9 @@ use EssentialsPE\BaseFiles\BaseEventHandler;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityLevelChangeEvent;
-use pocketmine\event\entity\EntityTeleportEvent;
 use pocketmine\event\player\PlayerBedEnterEvent;
 use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\event\player\PlayerCommandPreprocessEvent;
-use pocketmine\event\player\PlayerDeathEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\event\player\PlayerPreLoginEvent;
@@ -134,17 +132,7 @@ class PlayerEvents extends BaseEventHandler{
 
         $this->getAPI()->setLastPlayerMovement($entity, time());
     }
-
-    /**
-     * @param EntityTeleportEvent $event
-     */
-    public function onEntityTeleport(EntityTeleportEvent $event): void{
-        $entity = $event->getEntity();
-        if($entity instanceof Player){
-            $this->getAPI()->setPlayerLastPosition($entity, $entity->getLocation());
-        }
-    }
-
+    
     /**
      * @param EntityLevelChangeEvent $event
      *
@@ -195,17 +183,6 @@ class PlayerEvents extends BaseEventHandler{
                     }
                 }
             }
-        }
-    }
-
-    /**
-     * @param PlayerDeathEvent $event
-     */
-    public function onPlayerDeath(PlayerDeathEvent $event): void{
-        if($event->getEntity()->hasPermission("essentials.back.ondeath")){
-            $this->getAPI()->setPlayerLastPosition($event->getEntity(), $event->getEntity()->getLocation());
-        }else{
-            $this->getAPI()->removePlayerLastPosition($event->getEntity());
         }
     }
 }
