@@ -24,7 +24,7 @@ class BaseLocation extends Location{
      * @param float $pitch
      */
     public function __construct(string $name, int $x, int $y, int $z, Level $level, float $yaw, float $pitch){
-        parent::__construct($x, $y, $z, $yaw, $pitch, $level);
+        parent::__construct($x, $y, $z, $level, $yaw, $pitch);
         $this->name = $name;
         $this->levelName = $level->getName();
     }
