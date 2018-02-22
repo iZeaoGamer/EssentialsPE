@@ -61,14 +61,12 @@ class BaseAPI{
     private $ess;
     /** @var BaseAPI */
     private static $instance;
-
     /** @var Config */
     private $economy;
     /** @var array */
     private $kits = [];
     /** @var array */
     private $warps = [];
-
     /**
      * @param Loader $ess
      */
@@ -78,32 +76,27 @@ class BaseAPI{
         $this->saveConfigs();
         $this->getServerGeoLocation();
     }
-
     public function close(): void{
         $this->encodeWarps(true);
     }
-
     /**
      * @return Loader
      */
     public final function getEssentialsPEPlugin(): Loader{
         return $this->ess;
     }
-
     /**
      * @return Server
      */
     public function getServer(): Server{
         return $this->getEssentialsPEPlugin()->getServer();
     }
-
     /**
      * @return BaseAPI
      */
     public static function getInstance(): BaseAPI{
         return self::$instance;
     }
-
     private final function saveConfigs(): void{
         $this->economy = new Config($this->getEssentialsPEPlugin()->getDataFolder() . "Economy.yml", Config::YAML);
         $keys = ["default-balance", "max-money", "min-money"];
@@ -126,12 +119,10 @@ class BaseAPI{
                 $this->economy->set($k, $value);
             }
         }
-
         $this->loadKits();
         $this->loadWarps();
         $this->updateHomesAndNicks();
     }
-
     private final function updateHomesAndNicks(): void{
         if(file_exists($f = $this->getEssentialsPEPlugin()->getDataFolder() . "Homes.yml")){
             $cfg = new Config($f, Config::YAML);
@@ -157,11 +148,9 @@ class BaseAPI{
             unlink($f);
         }
     }
-
     private final function loadKits(): void{
         $parent = new Permission("essentials.kits");
         $this->getServer()->getPluginManager()->addPermission($parent);
-
         $cfg = new Config($this->getEssentialsPEPlugin()->getDataFolder() . "Kits.yml", Config::YAML);
         foreach($cfg->getAll() as $n => $i){
             $this->kits[$n] = new BaseKit($n, $i);
@@ -170,11 +159,9 @@ class BaseAPI{
             $this->getServer()->getPluginManager()->addPermission($child);
         }
     }
-
     private final function loadWarps(): void{
         $parent = new Permission("essentials.warps", null, null);
         $this->getServer()->getPluginManager()->addPermission($parent);
-
         $cfg = new Config($this->getEssentialsPEPlugin()->getDataFolder() . "Warps.yml", Config::YAML);
         foreach($cfg->getAll() as $n => $v){
             if($this->getServer()->isLevelGenerated($v[3])){
@@ -188,7 +175,6 @@ class BaseAPI{
             }
         }
     }
-
     /**
      * @param bool $save
      */
@@ -206,7 +192,6 @@ class BaseAPI{
         }
         $this->warps = $warps;
     }
-
     public function reloadFiles(): void{
         $this->getEssentialsPEPlugin()->getConfig()->reload();
         $this->economy->reload();
@@ -214,7 +199,6 @@ class BaseAPI{
         $this->loadWarps();
         $this->updateHomesAndNicks();
     }
-
     /*
      *  .----------------.  .----------------.  .----------------.
      * | .--------------. || .--------------. || .--------------. |
@@ -229,11 +213,9 @@ class BaseAPI{
      *  '----------------'  '----------------'  '----------------'
      *
      */
-
     const NON_SOLID_BLOCKS = [Block::SAPLING, Block::WATER, Block::STILL_WATER, Block::LAVA, Block::STILL_LAVA, Block::COBWEB, Block::TALL_GRASS, Block::DEAD_BUSH, Block::DANDELION,
         Block::POPPY, Block::BROWN_MUSHROOM, Block::RED_MUSHROOM, Block::TORCH, Block::FIRE, Block::WHEAT_BLOCK, Block::SIGN_POST, Block::WALL_SIGN, Block::SUGARCANE_BLOCK,
         Block::PUMPKIN_STEM, Block::MELON_STEM, Block::VINE, Block::CARROT_BLOCK, Block::POTATO_BLOCK, Block::DOUBLE_PLANT];
-
     /**
      *            ______ _  __
      *      /\   |  ____| |/ /
@@ -242,7 +224,6 @@ class BaseAPI{
      *   / ____ \| |    | . \
      *  /_/    \_|_|    |_|\_\
      */
-
     /**
      * Tell if the player is AFK or not
      *
@@ -252,7 +233,6 @@ class BaseAPI{
     public function isAFK(Player $player): bool{
         return $this->getSession($player)->isAFK();
     }
-
     /**
      * Change the AFK mode of a player
      *
@@ -282,7 +262,6 @@ class BaseAPI{
         }
         return true;
     }
-
     /**
      * Automatically switch the AFK mode on/off
      *
@@ -292,7 +271,6 @@ class BaseAPI{
     public function switchAFKMode(Player $player, bool $broadcast = true): void{
         $this->setAFKMode($player, !$this->isAFK($player), $broadcast);
     }
-
     /**
      * For internal use ONLY
      *
@@ -303,7 +281,6 @@ class BaseAPI{
             $this->getServer()->getScheduler()->scheduleDelayedTask(new AFKSetterTask($this), 600); // Check every 30 seconds...
         }
     }
-
     /**
      * Get the last time that a player moved
      *
@@ -313,7 +290,6 @@ class BaseAPI{
     public function getLastPlayerMovement(Player $player): ?int{
         return $this->getSession($player)->getLastMovement();
     }
-
     /**
      * Change the last time that a player moved
      *
@@ -325,7 +301,6 @@ class BaseAPI{
             $this->getSession($player)->setLastMovement($time);
         }
     }
-
     /**
      * Broadcast the AFK status of a player
      *
@@ -343,7 +318,6 @@ class BaseAPI{
             }
         }
     }
-   
     /**  ____             _
      *  |  _ \           | |
      *  | |_) | __ _  ___| | __
@@ -351,34 +325,30 @@ class BaseAPI{
      *  | |_) | (_| | (__|   <
      *  |____/ \__,_|\___|_|\_\
      */
-
     /**
      * Return the last known spot of a player before teleporting
      *
      * @param Player $player
      * @return null|Location
-     *//*
+     */
     public function getLastPlayerPosition(Player $player): ?Location{
         return $this->getSession($player)->getLastPosition();
     }
-
     /**
      * Updates the last position of a player.
      *
      * @param Player $player
      * @param Location $pos
-     
+     */
     public function setPlayerLastPosition(Player $player, Location $pos): void{
         $this->getSession($player)->setLastPosition($pos);
     }
-
     /**
      * @param Player $player
      */
     public function removePlayerLastPosition(Player $player): void{
         $this->getSession($player)->removeLastPosition();
     }
-
     /**  ______
      *  |  ____|
      *  | |__   ___ ___  _ __   ___  _ __ ___  _   _
@@ -388,7 +358,6 @@ class BaseAPI{
      *                                          __/ |
      *                                         |___/
      */
-
     /**
      * Get the default balance for new players
      *
@@ -397,7 +366,6 @@ class BaseAPI{
     public function getDefaultBalance(): int{
         return (int) $this->economy->get("default-balance");
     }
-
     /**
      * Get the max balance that a player can own
      *
@@ -406,7 +374,6 @@ class BaseAPI{
     public function getMaxBalance(): int{
         return (int) $this->economy->get("max-money");
     }
-
     /**
      * Gets the minimum balance that a player can own
      *
@@ -415,7 +382,6 @@ class BaseAPI{
     public function getMinBalance(): int{
         return (int) $this->economy->get("min-money");
     }
-
     /**
      * Returns the currency symbol
      *
@@ -424,7 +390,6 @@ class BaseAPI{
     public function getCurrencySymbol(): string{
         return (string) $this->economy->get("currency-symbol");
     }
-
     /**
      * Return the top 5 players with most money
      *
@@ -460,7 +425,6 @@ class BaseAPI{
         }
         return $balance;
     }
-
     /**
      * Sets the balance of a player
      *
@@ -478,7 +442,6 @@ class BaseAPI{
         $this->economy->setNested("player-balances." . $player->getName(), $balance);
         $this->economy->save();
     }
-
     /**
      * Sums a quantity to player's balance
      * NOTE: You can also specify negative quantities!
@@ -497,7 +460,6 @@ class BaseAPI{
         }
         $this->setPlayerBalance($player, $balance);
     }
-
     /**
      * Get the worth of an item
      *
@@ -507,7 +469,6 @@ class BaseAPI{
     public function getItemWorth(int $itemId): int{
         return $this->economy->getNested("worth." . $itemId, false);
     }
-
     /**
      * Sets the worth of an item
      *
@@ -518,7 +479,6 @@ class BaseAPI{
         $this->economy->setNested("worth." . $itemId, $worth);
         $this->economy->save();
     }
-
     /**
      * @param Player $player
      * @param Item $item
@@ -552,7 +512,6 @@ class BaseAPI{
         }elseif($amount > $quantity){
             return -1;
         }
-
         $count = $amount;
         foreach($contents as $s => $i){
             if(($count - $i->getCount()) >= 0){
@@ -581,7 +540,6 @@ class BaseAPI{
         }
         return false;
     }
-
     /**  ______       _   _ _   _
      *  |  ____|     | | (_| | (_)
      *  | |__   _ __ | |_ _| |_ _  ___ ___
@@ -589,7 +547,6 @@ class BaseAPI{
      *  | |____| | | | |_| | |_| |  __\__ \
      *  |______|_| |_|\__|_|\__|_|\___|___/
      */
-
     /**
      * @param Player $player
      * @return bool
@@ -602,7 +559,6 @@ class BaseAPI{
         $this->createTNT($block->add(0, 1), $player->getLevel());
         return true;
     }
-
     /**
      * Spawn a carpet of bomb!
      *
@@ -615,7 +571,6 @@ class BaseAPI{
             }
         }
     }
-
     /**
      * @param string $type
      * @param Vector3 $pos
@@ -641,10 +596,8 @@ class BaseAPI{
                 ])
             ]);
         }
-
         return Entity::createEntity($type, $level, $nbt);
     }
-
     /**
      * @param Vector3|Position $pos
      * @param null|Level $level
@@ -679,7 +632,6 @@ class BaseAPI{
         }
         return null;
     }
-
     /**
      * @param Position|Player $pos
      * @param int $damage
@@ -696,10 +648,8 @@ class BaseAPI{
             $e->attack(new EntityDamageEvent($pos, EntityDamageEvent::CAUSE_MAGIC, $damage));
         }
     }
-
     /** @var null|AddEntityPacket */
     private $lightningPacket = null;
-
     /**
      * @param Vector3 $pos
      *
@@ -716,10 +666,8 @@ class BaseAPI{
             $this->lightningPacket = $pk;
         }
         $this->lightningPacket->position = $pos;
-
         return $this->lightningPacket;
     }
-
     /**  ______ _
      *  |  ____| |
      *  | |__  | |_   _
@@ -729,7 +677,6 @@ class BaseAPI{
      *             __/ |
      *            |___/
      */
-
     /**
      * Get the "Can fly" status of a player
      *
@@ -740,7 +687,6 @@ class BaseAPI{
     public function canFly(Player $player): bool{
         return $player->getAllowFlight();
     }
-
     /**
      * Set the "flying" allowed status to a player
      *
@@ -757,7 +703,6 @@ class BaseAPI{
         $player->setAllowFlight($ev->willFly());
         return true;
     }
-
     /**
      * Automatically switch a player between "Can" and "Can't" fly
      *
@@ -766,7 +711,6 @@ class BaseAPI{
     public function switchCanFly(Player $player): void{
         $this->setFlying($player, !$this->canFly($player));
     }
-
     /**   _____            _                     _   _
      *   / ____|          | |                   | | (_)
      *  | |  __  ___  ___ | |     ___   ___ __ _| |_ _  ___  _ __
@@ -774,10 +718,8 @@ class BaseAPI{
      *  | |__| |  __| (_) | |___| (_) | (_| (_| | |_| | (_) | | | |
      *   \_____|\___|\___/|______\___/ \___\__,_|\__|_|\___/|_| |_|
      */
-
     /** @var string */
     private $serverGeoLocation = "Unknown";
-
     /**
      * @param Player $player
      *
@@ -786,7 +728,6 @@ class BaseAPI{
     public function getGeoLocation(Player $player): ?string{
         return $this->getSession($player)->getGeoLocation();
     }
-
     /**
      * @return string
      */
@@ -796,7 +737,6 @@ class BaseAPI{
         }
         return $this->serverGeoLocation;
     }
-
     /**
      * @param Player $player
      * @param string $location
@@ -804,7 +744,6 @@ class BaseAPI{
     public function updateGeoLocation(Player $player, string $location): void{
         $this->getSession($player)->setGeoLocation($location);
     }
-
     /**
      * @param string $location
      */
@@ -813,7 +752,6 @@ class BaseAPI{
             $this->serverGeoLocation = $location;
         }
     }
-
     /**   _____           _
      *   / ____|         | |
      *  | |  __  ___   __| |
@@ -821,7 +759,6 @@ class BaseAPI{
      *  | |__| | (_) | (_| |
      *   \_____|\___/ \__,_|
      */
-
     /**
      * Tell if a player is in God Mode
      *
@@ -832,7 +769,6 @@ class BaseAPI{
     public function isGod(Player $player): bool{
         return $this->getSession($player)->isGod();
     }
-
     /**
      * Set the God Mode on or off
      *
@@ -849,7 +785,6 @@ class BaseAPI{
         $this->getSession($player)->setGod($ev->getGodMode());
         return true;
     }
-
     /**
      * Switch God Mode on/off automatically
      *
@@ -858,7 +793,6 @@ class BaseAPI{
     public function switchGodMode(Player $player): void{
         $this->setGodMode($player, !$this->isGod($player));
     }
-
     /**  _    _
      *  | |  | |
      *  | |__| | ___  _ __ ___   ___ ___
@@ -866,7 +800,6 @@ class BaseAPI{
      *  | |  | | (_) | | | | | |  __\__ \
      *  |_|  |_|\___/|_| |_| |_|\___|___/
      */
-
     /**
      * Tell is a player have a specific home by its name
      *
@@ -878,7 +811,6 @@ class BaseAPI{
     public function homeExists(Player $player, string $home): bool{
         return $this->sessionExists($player) && $this->getSession($player)->homeExists($home);
     }
-
     /**
      * Return the home information (Position and Rotation)
      *
@@ -890,7 +822,6 @@ class BaseAPI{
     public function getHome(Player $player, string $home): ?BaseLocation{
         return $this->getSession($player)->getHome($home);
     }
-
     /**
      * Create or update a home
      *
@@ -905,7 +836,6 @@ class BaseAPI{
     public function setHome(Player $player, string $home, Position $pos, float $yaw = 0.0, float $pitch = 0.0): bool{
         return $this->getSession($player)->setHome($home, ($pos instanceof Location ? $pos : Location::fromObject($pos, $pos->getLevel(), $yaw, $pitch)));
     }
-
     /**
      * Removes a home
      *
@@ -917,7 +847,6 @@ class BaseAPI{
     public function removeHome(Player $player, string $home): bool{
         return $this->getSession($player)->removeHome($home);
     }
-
     /**
      * Return a list of all the available homes of a certain player
      *
@@ -928,7 +857,6 @@ class BaseAPI{
     public function homesList(Player $player, bool $inArray = false){
         return $this->getSession($player)->homesList($inArray);
     }
-
     /**  _____ _
      *  |_   _| |
      *    | | | |_ ___ _ __ ___  ___
@@ -936,7 +864,6 @@ class BaseAPI{
      *   _| |_| ||  __| | | | | \__ \
      *  |_____|\__\___|_| |_| |_|___/
      */
-
     /**
      * Easy get an item by name and metadata.
      * The way this function understand the information about the item is:
@@ -954,7 +881,6 @@ class BaseAPI{
         }else{
             $damage = 0;
         }
-
         if(!is_numeric($item_name)){
             $item = Item::fromString($item_name);
 	        if(strtolower($item_name) !== "air" && $item->getId() === Item::AIR) {
@@ -964,10 +890,8 @@ class BaseAPI{
             $item = Item::get($item_name);
         }
         $item->setDamage($damage);
-
         return $item;
     }
-
 	/**
 	 * Returns a name of an item using the class constants of the Item class.
 	 * This name is not equal to the getName() function from Item classes.
@@ -990,7 +914,6 @@ class BaseAPI{
 		}
 		return implode(" ", $finalItemName);
 	}
-
 	/**
 	 * Converts the readable item name (made using function above) to an Item object.
 	 *
@@ -1005,7 +928,6 @@ class BaseAPI{
 		}
 		return Item::get(Item::AIR);
 	}
-
     /**
      * Let you know if the item is a Tool or Armor
      * (Items that can get "real damage")
@@ -1016,7 +938,6 @@ class BaseAPI{
     public function isRepairable(Item $item): bool{
         return $item instanceof Tool || $item instanceof Armor;
     }
-
     /**
      * Condense items into blocks in an inventory, default MCPE item calculations (recipes) are used.
      *
@@ -1065,13 +986,11 @@ class BaseAPI{
         }
         return true;
     }
-
     /** @var array */
     private $condenseShapes = [
         [], // 2x2 Shapes TODO
         [Item::COAL => Item::COAL_BLOCK, Item::IRON_INGOT => Item::IRON_BLOCK, Item::GOLD_INGOT => Item::GOLD_BLOCK, Item::DIAMOND => Item::DIAMOND_BLOCK, Item::EMERALD => Item::EMERALD_BLOCK] // 3x3 Shapes
     ];
-
     /**
      * @param Item $item
      * @return Item|null
@@ -1105,7 +1024,6 @@ class BaseAPI{
         $item->setCount($item->getCount() - ($count * $shape));
         return $condensed;
     }
-
     /**
      * @param Item $item
      * @return bool
@@ -1113,7 +1031,6 @@ class BaseAPI{
     public function canBeCondensed(Item $item): bool{
         return isset($this->condenseShapes[0][$item->getId()]) || isset($this->condenseShapes[1][$item->getId()]);
     }
-
     /**  _  ___ _
      *  | |/ (_| |
      *  | ' / _| |_ ___
@@ -1121,7 +1038,6 @@ class BaseAPI{
      *  | . \| | |_\__ \
      *  |_|\_|_|\__|___/
      */
-
     /**
      * Check if a kit exists
      *
@@ -1131,7 +1047,6 @@ class BaseAPI{
     public function kitExists(string $kit): bool{
         return $this->validateName($kit, false) && isset($this->kits[$kit]);
     }
-
     /**
      * Return the contents of a kit, if existent
      *
@@ -1144,7 +1059,6 @@ class BaseAPI{
         }
         return $this->kits[$kit];
     }
-
     /**
      * Get a list of all available kits
      *
@@ -1161,7 +1075,6 @@ class BaseAPI{
         }
         return $list;
     }
-
     /**  __  __
      *  |  \/  |
      *  | \  / | ___ ___ ___  __ _  __ _  ___ ___
@@ -1171,14 +1084,11 @@ class BaseAPI{
      *                              __/ |
      *                             |___/
      */
-
     /** @var MessagesAPI */
     private $messagesAPI = null;
-
     public function loadMessagesAPI(): void{
         //$this->messagesAPI = new MessagesAPI($this, $this->getFile() . "resources/Messages.yml"); TODO Directly implement in this class
     }
-
     /**
      * @return MessagesAPI
      */
@@ -1188,7 +1098,6 @@ class BaseAPI{
         }
         return $this->messagesAPI;
     }
-
     /**
      * Return a colored message replacing every
      * color code (&a = §a)
@@ -1213,7 +1122,6 @@ class BaseAPI{
         }
         return $message;
     }
-
     /**
      * Checks if a name is valid, it could be for a Home, Warp, etc...
      *
@@ -1237,7 +1145,6 @@ class BaseAPI{
         }
         return true;
     }
-
     /**   ____        _      _    _____            _
      *   / __ \      (_)    | |  |  __ \          | |
      *  | |  | |_   _ _  ___| | _| |__) |___ _ __ | |_   _
@@ -1247,13 +1154,11 @@ class BaseAPI{
      *                                      | |       __/ |
      *                                      |_|      |___/
      */
-
     /** @var array */
     private $quickReply = [
         "console" => false,
         "rcon" => false
     ];
-
     /**
      * Get the target for QuickReply, in string...
      *
@@ -1269,7 +1174,6 @@ class BaseAPI{
         }
         return $q;
     }
-
     /**
      * Assign a player to use with QuickReply
      *
@@ -1283,7 +1187,6 @@ class BaseAPI{
             $this->quickReply[strtolower($messaged->getName())] = $messenger->getName();
         }
     }
-
     /**
      * Removes QuickReply
      *
@@ -1296,7 +1199,6 @@ class BaseAPI{
             $this->quickReply[strtolower($sender->getName())] = false;
         }
     }
-
     /**  __  __       _
      *  |  \/  |     | |
      *  | \  / |_   _| |_ ___
@@ -1304,7 +1206,6 @@ class BaseAPI{
      *  | |  | | |_| | ||  __/
      *  |_|  |_|\__,_|\__\___|
      */
-
     /**
      * Tell if the is Muted or not
      *
@@ -1315,7 +1216,6 @@ class BaseAPI{
     public function isMuted(Player $player): bool{
         return $this->getSession($player)->isMuted();
     }
-
     /**
      * Tell the time until a player will be muted
      * false = If player is not muted
@@ -1332,7 +1232,6 @@ class BaseAPI{
         }
         return $this->getSession($player)->getMutedUntil();
     }
-
     /**
      * Set the Mute mode on or off
      *
@@ -1356,7 +1255,6 @@ class BaseAPI{
         }
         return true;
     }
-
     /**
      * Switch the Mute mode on/off automatically
      *
@@ -1367,7 +1265,6 @@ class BaseAPI{
     public function switchMute(Player $player, \DateTime $expires = null, bool $notify = true): void{
         $this->setMute($player, !$this->isMuted($player), $expires, $notify);
     }
-
     /**  _   _ _      _
      *  | \ | (_)    | |
      *  |  \| |_  ___| | _____
@@ -1375,7 +1272,6 @@ class BaseAPI{
      *  | |\  | | (__|   <\__ \
      *  |_| \_|_|\___|_|\_|___/
      */
-
     /**
      * Get players' saved Nicks
      *
@@ -1386,7 +1282,6 @@ class BaseAPI{
     public function getNick(Player $player): ?string{
         return $this->getSession($player)->getNick();
     }
-
     /**
      * Change the player name for chat and even on his NameTag (aka Nick)
      *
@@ -1410,7 +1305,6 @@ class BaseAPI{
         $this->getSession($player)->setNick($ev->getNewNick());
         return true;
     }
-
     /**
      * Restore the original player name for chat and on his NameTag
      *
@@ -1426,7 +1320,6 @@ class BaseAPI{
         $this->getSession($player)->setNick(null);
         return true;
     }
-
     /**  _____  _
      *  |  __ \| |
      *  | |__) | | __ _ _   _  ___ _ __
@@ -1436,7 +1329,6 @@ class BaseAPI{
      *                   __/ |
      *                  |___/
      */
-
     /**
      * Let you search for a player using his Display name(Nick) or Real name
      *
@@ -1498,7 +1390,6 @@ class BaseAPI{
         }
         return $player;
     }
-
     /**
      * Let you see who is near a specific player
      *
@@ -1523,7 +1414,6 @@ class BaseAPI{
         }
         return $players;
     }
-
     /**
      * @param Player $player
      *
@@ -1538,7 +1428,6 @@ class BaseAPI{
             "location" => $this->getGeoLocation($player)
         ];
     }
-
     /**  _____                    _______          _
      *  |  __ \                  |__   __|        | |
      *  | |__) _____      _____ _ __| | ___   ___ | |
@@ -1546,7 +1435,6 @@ class BaseAPI{
      *  | |  | (_) \ V  V |  __| |  | | (_) | (_) | |
      *  |_|   \___/ \_/\_/ \___|_|  |_|\___/ \___/|_|
      */
-
     /**
      * Tell is PowerTool is enabled for a player, doesn't matter on what item
      *
@@ -1557,7 +1445,6 @@ class BaseAPI{
     public function isPowerToolEnabled(Player $player): bool{
         return $this->getSession($player)->isPowerToolEnabled();
     }
-
     /**
      * Run all the commands and send all the chat messages assigned to an item
      *
@@ -1590,7 +1477,6 @@ class BaseAPI{
         }
         return true;
     }
-
     /**
      * Sets a command for the item you have in hand
      * NOTE: If the hand is empty, it will be cancelled
@@ -1604,7 +1490,6 @@ class BaseAPI{
     public function setPowerToolItemCommand(Player $player, Item $item, string $command): bool{
         return $this->getSession($player)->setPowerToolItemCommand($item->getId(), $command);
     }
-
     /**
      * Return the command attached to the specified item if it's available
      * NOTE: Only return the command if there're no more commands, for that use "getPowerToolItemCommands" (note the "s" at the final :P)
@@ -1617,7 +1502,6 @@ class BaseAPI{
     public function getPowerToolItemCommand(Player $player, Item $item): ?string{
         return $this->getSession($player)->getPowerToolItemCommand($item->getId());
     }
-
     /**
      * Let you assign multiple commands to an item
      *
@@ -1630,7 +1514,6 @@ class BaseAPI{
     public function setPowerToolItemCommands(Player $player, Item $item, array $commands): bool{
         return $this->getSession($player)->setPowerToolItemCommands($item->getId(), $commands);
     }
-
     /**
      * Return a the list of commands assigned to an item
      * (if they're more than 1)
@@ -1643,7 +1526,6 @@ class BaseAPI{
     public function getPowerToolItemCommands(Player $player, Item $item): ?array{
         return $this->getSession($player)->getPowerToolItemCommands($item->getId());
     }
-
     /**
      * Let you remove 1 command of the item command list
      * [ONLY if there're more than 1)
@@ -1655,7 +1537,6 @@ class BaseAPI{
     public function removePowerToolItemCommand(Player $player, Item $item, string $command): void{
         $this->getSession($player)->removePowerToolItemCommand($item->getId(), $command);
     }
-
     /**
      * Set a chat message to broadcast has the player
      *
@@ -1668,7 +1549,6 @@ class BaseAPI{
     public function setPowerToolItemChatMacro(Player $player, Item $item, string $chat_message): bool{
         return $this->getSession($player)->setPowerToolItemChatMacro($item->getId(), $chat_message);
     }
-
     /**
      * Get the message to broadcast has the player
      *
@@ -1680,7 +1560,6 @@ class BaseAPI{
     public function getPowerToolItemChatMacro(Player $player, Item $item): ?string{
         return $this->getSession($player)->getPowerToolItemChatMacro($item->getId());
     }
-
     /**
      * Remove the command only for the item in hand
      *
@@ -1691,7 +1570,6 @@ class BaseAPI{
     public function disablePowerToolItem(Player $player, Item $item): void{
         $this->getSession($player)->disablePowerToolItem($item->getId());
     }
-
     /**
      * Remove the commands for all the items of a player
      *
@@ -1700,7 +1578,6 @@ class BaseAPI{
     public function disablePowerTool(Player $player): void{
         $this->getSession($player)->disablePowerTool();
     }
-
     /**  _____        _____
      *  |  __ \      |  __ \
      *  | |__) __   _| |__) |
@@ -1708,7 +1585,6 @@ class BaseAPI{
      *  | |     \ V /| |
      *  |_|      \_/ |_|
      */
-
     /**
      * Tell if the PvP mode is enabled for the specified player, or not
      *
@@ -1719,7 +1595,6 @@ class BaseAPI{
     public function isPvPEnabled(Player $player): bool{
         return $this->getSession($player)->isPVPEnabled();
     }
-
     /**
      * Set the PvP mode on or off
      *
@@ -1736,7 +1611,6 @@ class BaseAPI{
         $this->getSession($player)->setPvP($ev->getPvPMode());
         return true;
     }
-
     /**
      * Switch the PvP mode on/off automatically
      *
@@ -1745,7 +1619,6 @@ class BaseAPI{
     public function switchPvP(Player $player): void{
         $this->setPvP($player, !$this->isPvPEnabled($player));
     }
-
     /**   _____              _
      *   / ____|            (_)
      *  | (___   ___ ___ ___ _  ___  _ __  ___
@@ -1753,10 +1626,8 @@ class BaseAPI{
      *   ____) |  __\__ \__ | | (_) | | | \__ \
      *  |_____/ \___|___|___|_|\___/|_| |_|___/
      */
-
     /** @var array  */
     private $sessions = [];
-
     /**     * Tell if a session exists for a specific player
      *
      * @param Player $player
@@ -1766,7 +1637,6 @@ class BaseAPI{
     public function sessionExists(Player $player): bool{
         return isset($this->sessions[spl_object_hash($player)]);
     }
-
     /**
      * Creates a new Sessions for the specified player
      *
@@ -1837,7 +1707,6 @@ class BaseAPI{
         $this->getEssentialsPEPlugin()->getLogger()->debug("Finished session creation.");
         return $r;
     }
-
     /**
      * @param string $player
      *
@@ -1853,7 +1722,6 @@ class BaseAPI{
         }
         return new Config($dir . strtolower($player) . ".session", Config::JSON, BaseSession::$configDefaults);
     }
-
     /**
      * Remove player's session (if active and available)
      *
@@ -1870,7 +1738,6 @@ class BaseAPI{
             }
         }
     }
-
     /**
      * @param Player $player
      *
@@ -1882,7 +1749,6 @@ class BaseAPI{
         }
         return $this->sessions[spl_object_hash($player)];
     }
-
     /**  _______ _
      *  |__   __(_)
      *     | |   _ _ __ ___   ___
@@ -1890,7 +1756,6 @@ class BaseAPI{
      *     | |  | | | | | | |  __/
      *     |_|  |_|_| |_| |_|\___|
      */
-
     /**
      * Change the time of a player
      *
@@ -1910,7 +1775,6 @@ class BaseAPI{
         }
         return true;
     }
-
     /**
      * Return an array with the following values:
      * 0 => Timestamp integer
@@ -1964,7 +1828,6 @@ class BaseAPI{
         }
         return [$t, ltrim(str_replace($found[0], "", $string))];
     }
-
     /**  _______ _____  _____                           _
      *  |__   __|  __ \|  __ \                         | |
      *     | |  | |__) | |__) |___  __ _ _   _  ___ ___| |_ ___
@@ -1974,7 +1837,6 @@ class BaseAPI{
      *                                | |
      *                                |_|
      */
-
     /**
      * Tell if a player has a pending request
      * Return false if not
@@ -1989,7 +1851,6 @@ class BaseAPI{
     public function hasARequest(Player $player): ?array{
         return $this->getSession($player)->hasARequest();
     }
-
     /**
      * Tell if a player ($target) as a request from a specific player ($requester)
      * Return false if not
@@ -2005,7 +1866,6 @@ class BaseAPI{
     public function hasARequestFrom(Player $target, Player $requester): ?string{
         return $this->getSession($target)->hasARequestFrom($requester->getName());
     }
-
     /**
      * Return the name of the latest teleport requester for a specific player
      *
@@ -2016,7 +1876,6 @@ class BaseAPI{
     public function getLatestRequest(Player $player): ?string{
         return $this->getSession($player)->getLatestRequestFrom();
     }
-
     /**
      * Tell if a player made a request to another player
      * Return false if not
@@ -2031,7 +1890,6 @@ class BaseAPI{
     public function madeARequest(Player $player): ?array{
         return $this->getSession($player)->madeARequest();
     }
-
     /**
      * Schedule a Request to move $requester to $target's position
      *
@@ -2040,12 +1898,9 @@ class BaseAPI{
      */
     public function requestTPTo(Player $requester, Player $target): void{
         $this->getSession($requester)->requestTP($target->getName(), "tpto");
-
         $this->getSession($target)->receiveRequest($requester->getName(), "tpto");
-
         $this->scheduleTPRequestTask($requester);
     }
-
     /**
      * Schedule a Request to mode $target to $requester's position
      *
@@ -2054,12 +1909,9 @@ class BaseAPI{
      */
     public function requestTPHere(Player $requester, Player $target): void{
         $this->getSession($requester)->requestTP($target->getName(), "tphere");
-
         $this->getSession($target)->receiveRequest($requester->getName(), "tphere");
-
         $this->scheduleTPRequestTask($requester);
     }
-
     /**
      * Cancel the Request made by a player
      *
@@ -2072,7 +1924,6 @@ class BaseAPI{
         if(!$this->getSession($requester)->madeARequest() && $target === null){
             return false;
         }
-
         if($target !== null && $this->getSession($requester)->madeARequestTo($target->getName())){
             $this->getSession($requester)->cancelTPRequest();
             $this->getSession($target)->removeRequestFrom($requester->getName());
@@ -2083,11 +1934,9 @@ class BaseAPI{
                 $this->getSession($target)->removeRequestFrom($requester->getName());
             }
         }
-
         $this->cancelTPRequestTask($requester);
         return true;
     }
-
     /**
      * Schedule the Request auto-remover task (Internal use ONLY!)
      *
@@ -2097,7 +1946,6 @@ class BaseAPI{
         $task = $this->getServer()->getScheduler()->scheduleDelayedTask(new TPRequestTask($this, $player), 20 * 60 * 5);
         $this->getSession($player)->setRequestToTaskID($task->getTaskId());
     }
-
     /**
      * Cancel the Task (Internal use ONLY!)
      *
@@ -2107,8 +1955,6 @@ class BaseAPI{
         $this->getServer()->getScheduler()->cancelTask($this->getSession($player)->getRequestToTaskID());
         $this->getSession($player)->removeRequestToTaskID();
     }
-
-
     /**  _    _       _ _           _ _           _   _____ _
      *  | |  | |     | (_)         (_| |         | | |_   _| |
      *  | |  | |_ __ | |_ _ __ ___  _| |_ ___  __| |   | | | |_ ___ _ __ ___  ___
@@ -2116,7 +1962,6 @@ class BaseAPI{
      *  | |__| | | | | | | | | | | | | ||  __| (_| |  _| |_| ||  __| | | | | \__ \
      *   \____/|_| |_|_|_|_| |_| |_|_|\__\___|\__,_| |_____|\__\___|_| |_| |_|___/
      */
-
     /**
      * Tells if the unlimited mode is enabled
      *
@@ -2127,7 +1972,6 @@ class BaseAPI{
     public function isUnlimitedEnabled(Player $player): bool{
         return $this->getSession($player)->isUnlimitedEnabled();
     }
-
     /**
      * Set the unlimited place of items on/off to a player
      *
@@ -2144,7 +1988,6 @@ class BaseAPI{
         $this->getSession($player)->setUnlimited($ev->getUnlimitedMode());
         return true;
     }
-
     /**
      * Automatically switch the state of the Unlimited mode
      *
@@ -2153,7 +1996,6 @@ class BaseAPI{
     public function switchUnlimited(Player $player): void{
         $this->setUnlimited($player, !$this->isUnlimitedEnabled($player));
     }
-
     /**  _    _           _       _
      *  | |  | |         | |     | |
      *  | |  | |_ __   __| | __ _| |_ ___ _ __
@@ -2163,13 +2005,10 @@ class BaseAPI{
      *         | |
      *         |_|
      */
-
     /** @var UpdateFetchTask */
     private $updaterTask = null;
-
     /** @var UpdateInstallTask */
     public $updaterDownloadTask = null; // Used to prevent Async Task conflicts with Server's limit :P
-
     /**
      * Tell if the auto-updater is enabled or not
      *
@@ -2178,7 +2017,6 @@ class BaseAPI{
     public function isUpdaterEnabled(): bool{
         return $this->getEssentialsPEPlugin()->getConfig()->getNested("updater.enabled");
     }
-
     /**
      * Tell the build of the updater for EssentialsPE
      *
@@ -2187,7 +2025,6 @@ class BaseAPI{
     public function getUpdateBuild(): string{
         return $this->getEssentialsPEPlugin()->getConfig()->getNested("updater.channel", "stable");
     }
-
     /**
      * Get the interval for the updater to get in action
      *
@@ -2196,7 +2033,6 @@ class BaseAPI{
     public function getUpdaterInterval(): int{
         return $this->getEssentialsPEPlugin()->getConfig()->getNested("updater.time-interval");
     }
-
     /**
      * Get the latest version, and install it if you want
      *
@@ -2213,7 +2049,6 @@ class BaseAPI{
         $this->updaterTask = $task;
         return true;
     }
-
     /**
      * Schedules the updater task :3
      */
@@ -2222,7 +2057,6 @@ class BaseAPI{
             $this->getServer()->getScheduler()->scheduleDelayedTask(new AutoFetchCallerTask($this), $this->getUpdaterInterval() * 20);
         }
     }
-
     /**
      * Warn about a new update of EssentialsPE
      *
@@ -2240,7 +2074,6 @@ class BaseAPI{
             }
         }
     }
-
     /** __      __         _     _
      *  \ \    / /        (_)   | |
      *   \ \  / __ _ _ __  _ ___| |__
@@ -2248,10 +2081,8 @@ class BaseAPI{
      *     \  | (_| | | | | \__ | | | |
      *      \/ \__,_|_| |_|_|___|_| |_|
      */
-
     /** @var null|Effect */
     private $invisibilityEffect = null;
-
     /**
      * Tell if a player is Vanished, or not
      *
@@ -2262,7 +2093,6 @@ class BaseAPI{
     public function isVanished(Player $player): bool{
         return $this->getSession($player)->isVanished();
     }
-
     /**
      * Tells if the specified player has "noPacket" enabled for vanish
      *
@@ -2273,7 +2103,6 @@ class BaseAPI{
     public function hasNoPacket(Player $player): bool{
         return $this->getSession($player)->noPacket();
     }
-
     /**
      * Set the Vanish mode on or off
      *
@@ -2337,7 +2166,6 @@ class BaseAPI{
         $this->getSession($player)->setVanish($state, !$state ? $ev->noPacket() : $noPacket);
         return true;
     }
-
     /**
      * Switch the Vanish mode on/off automatically
      *
@@ -2349,7 +2177,6 @@ class BaseAPI{
         $this->setVanish($player, !$this->isVanished($player));
         return true;
     }
-
     /**
      * Allow to switch between levels Vanished!
      * You need to teleport the player to a different level in order to call this event
@@ -2360,18 +2187,15 @@ class BaseAPI{
      */
     public function switchLevelVanish(Player $player, Level $origin, Level $target): void{
         if($origin !== $target && $this->isVanished($player)){
-
             // This will be used if the specified player has "noPacket" enabled.
             // A temporal check will be used for "the other players".
             $noPacket = $this->hasNoPacket($player);
-
             // Just as prevention if any player has "noPacket" disabled...
             $pk = new MobEffectPacket();
             $pk->effectId = $this->invisibilityEffect->getId();
             $pk->amplifier = $this->invisibilityEffect->getAmplifier();
             $pk->particles = $this->invisibilityEffect->isVisible();
             $pk->duration = $this->invisibilityEffect->getDuration();
-
             // Show to origin's players
             $pk->eventId = MobEffectPacket::EVENT_REMOVE;
             foreach($origin->getPlayers() as $p){
@@ -2418,7 +2242,6 @@ class BaseAPI{
             }
         }
     }
-
     /** __          __
      *  \ \        / /
      *   \ \  /\  / __ _ _ __ _ __
@@ -2428,7 +2251,6 @@ class BaseAPI{
      *                       | |
      *                       |_|
      */
-
     /**
      * Tell if a warp exists
      *
@@ -2438,7 +2260,6 @@ class BaseAPI{
     public function warpExists(string $warp): bool{
         return $this->validateName($warp, false) && isset($this->warps[$warp]);
     }
-
     /**
      * Get a Location object of the warp
      * If the function returns "false", it means that the warp doesn't exists
@@ -2452,7 +2273,6 @@ class BaseAPI{
         }
         return $this->warps[$warp];
     }
-
     /**
      * Create a warp or override its position
      *
@@ -2469,7 +2289,6 @@ class BaseAPI{
         $this->warps[$warp] = $pos instanceof BaseLocation ? $pos : BaseLocation::fromPosition($warp, ($pos instanceof Location ? $pos : Location::fromObject($pos, $pos->getLevel(), $yaw, $pitch)));
         return true;
     }
-
     /**
      * Removes a warp!
      * If the function return "false", it means that the warp doesn't exists
@@ -2484,7 +2303,6 @@ class BaseAPI{
         unset($this->warps[$warp]);
         return true;
     }
-
     /**
      * Return a list of all the available warps
      *
