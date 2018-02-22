@@ -1,7 +1,7 @@
 name: EssentialsPE
 main: EssentialsPE\Loader
-version: 3.0.0-rewrite
-api: [3.0.0-ALPHA10, 3.0.0-ALPHA11]
+version: 3.0.0-rewrite2
+api: [3.0.0-ALPHA11]
 author: VMPE Development Team
 website: Not showing.
 
