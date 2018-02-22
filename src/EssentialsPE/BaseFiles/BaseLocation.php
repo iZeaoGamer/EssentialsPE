@@ -6,15 +6,13 @@ namespace EssentialsPE\BaseFiles;
 
 use pocketmine\level\Level;
 use pocketmine\level\Location;
+
 class BaseLocation extends Location{
     /** @var string */
     protected $name;
-    /** @var float */
-    protected $yaw;
-    /** @var float */
-    protected $pitch;
     /** @var string */
     protected $levelName;
+	
     /**
      * @param string $name
      * @param int $x
@@ -24,11 +22,11 @@ class BaseLocation extends Location{
      * @param float $yaw
      * @param float $pitch
      */
-    public function __construct(string $name, int $x = 0, int $y = 0, int $z = 0, float $yaw = 0.0, float $pitch = 0.0, Level $level = null){
-        parent::__construct($x, $y, $z, $level);
+	
+    public function __construct(string $name, int $x, int $y, int $z, Level $level, float $yaw, float $pitch){
+        parent::__construct($x, $y, $z, $yaw, $pitch, $level);
         $this->name = $name;
-	$this->yaw = $yaw;
-	$this->pitch = $pitch;
+        $this->levelName = $level->getName();
     }
     /**
      * @return string
