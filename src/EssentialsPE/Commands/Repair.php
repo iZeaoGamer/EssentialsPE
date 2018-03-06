@@ -53,7 +53,7 @@ class Repair extends BaseCommand{
             }
             $m = TextFormat::GREEN . "§dAll the tools in your inventory were repaired!";
             if($sender->hasPermission("essentials.repair.armor")){
-                foreach($sender->getInventory()->getArmorContents() as $item){
+                foreach($sender->getArmorInventory()->getContents() as $item){
                     if($this->getAPI()->isRepairable($item)){
                         $item->setDamage(0);
                     }
