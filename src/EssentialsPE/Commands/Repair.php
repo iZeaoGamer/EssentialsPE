@@ -7,7 +7,8 @@ namespace EssentialsPE\Commands;
 use EssentialsPE\BaseFiles\BaseAPI;
 use EssentialsPE\BaseFiles\BaseCommand;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\inventory\PlayerInventory;
+use pocketmine\inventory\ArmorInventory;
 use pocketmine\utils\TextFormat;
 
 class Repair extends BaseCommand{
