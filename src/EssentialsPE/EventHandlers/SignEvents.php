@@ -164,7 +164,7 @@ class SignEvents extends BaseEventHandler{
                                 $item->setDamage(0);
                             }
                         }
-                        foreach ($event->getPlayer()->getInventory()->getArmorContents() as $item){
+                        foreach ($event->getPlayer()->getArmorInventory()->getContents() as $item){
                             if($this->getAPI()->isRepairable($item)){
                                 $item->setDamage(0);
                             }
