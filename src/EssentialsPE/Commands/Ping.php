@@ -4,7 +4,7 @@ declare(strict_types = 1);
 
 namespace EssentialsPE\Commands;
 
-
+use pocketmine\Player;
 use EssentialsPE\BaseFiles\BaseAPI;
 use EssentialsPE\BaseFiles\BaseCommand;
 use pocketmine\command\CommandSender;
@@ -27,7 +27,10 @@ class Ping extends BaseCommand{
         if(!$this->testPermission($sender)){
             return false;
         }
-        $sender->sendMessage("§6Pong!");
+        if(!$sender instanceof Player){
+            return false;
+        }
+        $sender->sendMessage("§6" . $sender->getPing() . "ms");
         return true;
     }
 }
