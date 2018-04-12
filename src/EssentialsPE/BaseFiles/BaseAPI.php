@@ -1603,7 +1603,7 @@ class BaseAPI{
      *
      * @return bool
      */
-    public function setPvP(Player $player, bool $state): void{
+    public function setPvP($player, $state){
         $this->getServer()->getPluginManager()->callEvent($ev = new PlayerPvPModeChangeEvent($this, $player, $state));
         if($ev->isCancelled()){
             return false;
@@ -1616,7 +1616,7 @@ class BaseAPI{
      *
      * @param Player $player
      */
-    public function switchPvP(Player $player): void{
+    public function switchPvP($player){
         $this->setPvP($player, !$this->isPvPEnabled($player));
     }
     /**   _____              _
