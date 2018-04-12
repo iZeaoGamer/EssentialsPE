@@ -159,14 +159,14 @@ class SignEvents extends BaseEventHandler{
                                 $this->getAPI()->addToPlayerBalance($event->getPlayer(), -$price);
                             }
                         }
-                        foreach ($event->getPlayer()->getInventory()->getContents() as $item){
+                        foreach ($event->getPlayer()->getInventory()->getContents(true) as $item){
                             if($this->getAPI()->isRepairable($item)){
-                                $item->setDamage(0);
+                                $player->getInventory()->setItem($index, (clone $item)->setDamage(0));
                             }
                         }
-                        foreach ($event->getPlayer()->getArmorInventory()->getContents() as $item){
+                        foreach ($event->getPlayer()->getArmorInventory()->getContents(true) as $armor){
                             if($this->getAPI()->isRepairable($item)){
-                                $item->setDamage(0);
+                                $player->getArmorInventory()->setItem($index, (clone $armor)->setDamage(0));
                             }
                         }
                         $event->getPlayer()->sendMessage(TextFormat::GREEN . "All the tools on your inventory were repaired" . TextFormat::AQUA . "\n(including the equipped Armor)" . TextFormat::GREEN . ($price ? " for " . $this->getAPI()->getCurrencySymbol() . $price : null));
