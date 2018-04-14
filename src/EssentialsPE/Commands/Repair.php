@@ -7,7 +7,7 @@ namespace EssentialsPE\Commands;
 use EssentialsPE\BaseFiles\BaseAPI;
 use EssentialsPE\BaseFiles\BaseCommand;
 use pocketmine\command\CommandSender;
-use pocketmine\inventory\PlayerInventory;
+use pocketmine\inventory\Inventory;
 use pocketmine\inventory\ArmorInventory;
 use pocketmine\utils\TextFormat;
 
@@ -49,14 +49,14 @@ class Repair extends BaseCommand{
             }
             foreach($sender->getInventory()->getContents() as $item){
                 if($this->getAPI()->isRepairable($item)){
-                    $item->setDamage(0);
+                    $item->setItem()->setDamage(0);
                 }
             }
             $m = TextFormat::GREEN . "§bAll the tools in your inventory were repaired!";
             if($sender->hasPermission("essentials.repair.armor")){
                 foreach($sender->getArmorInventory()->getContents() as $item){
                     if($this->getAPI()->isRepairable($item)){
-                        $item->setDamage(0);
+                        $item->setItem()->setDamage(0);
                     }
                 }
                 $m .= TextFormat::AQUA . " §3(Including the equipped Armor)";
@@ -66,7 +66,7 @@ class Repair extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . "[Error] §2This item can't be repaired!");
                 return false;
             }
-            $sender->getInventory()->getItemInHand()->setDamage(0);
+            $sender->getInventory()->getItemInHand()->setItem($item)->setDamage(0);
             $m = TextFormat::GREEN . "§bItem successfully repaired!";
         }
         $sender->sendMessage($m);
