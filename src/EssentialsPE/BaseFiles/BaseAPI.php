@@ -1384,7 +1384,7 @@ class BaseAPI{
      *
      * @return Player|OfflinePlayer
      */
-    public function getOfflinePlayer(string $name): IPlayer{
+    public function getOfflinePlayer(string $name): OfflinePlayer{
         $player = $this->getPlayer($name);
         if($player === false){
             $player = new OfflinePlayer($this->getServer(), strtolower($name));
@@ -1604,7 +1604,7 @@ class BaseAPI{
      *
      * @return bool
      */
-    public function setPvP($player, $state){
+    public function setPvP(Player $player, bool $state): bool{
         $this->getServer()->getPluginManager()->callEvent($ev = new PlayerPvPModeChangeEvent($this, $player, $state));
         if($ev->isCancelled()){
             return false;
@@ -1617,7 +1617,7 @@ class BaseAPI{
      *
      * @param Player $player
      */
-    public function switchPvP($player){
+    public function switchPvP(Player $player){
         $this->setPvP($player, !$this->isPvPEnabled($player));
     }
     /**   _____              _
@@ -2115,7 +2115,7 @@ class BaseAPI{
      */
     public function setVanish(Player $player, bool $state, bool $noPacket = false): bool{
         if($this->invisibilityEffect === null){
-            $effect = new EffectInstance(Effect::getEffect(Effect::Invisibility) (99999999*20), (1), (false));
+            $effect = new EffectInstance(Effect::getEffect(Effect::INVISIBILITY) (99999999*20), (1), (false));
             $this->invisibilityEffect = $effect;
         }
         $this->getServer()->getPluginManager()->callEvent($ev = new PlayerVanishEvent($this, $player, $state, $noPacket));
@@ -2282,7 +2282,7 @@ class BaseAPI{
      * @param float $pitch
      * @return bool
      */
-    public function setWarp($warp, Position $pos, float $yaw = 0.0, float $pitch = 0.0): bool{
+    public function setWarp(string $warp, Position $pos, float $yaw = 0.0, float $pitch = 0.0): bool{
         if(!$this->validateName($warp, false)){
             return false;
         }
