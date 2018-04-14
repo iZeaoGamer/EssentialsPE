@@ -16,7 +16,7 @@ class ItemCommand extends BaseCommand{
      * @param BaseAPI $api
      */
     public function __construct(BaseAPI $api){
-        parent::__construct($api, "item", "Gives yourself an item", "<item[:damage]> [amount]", false, ["i"]);
+        parent::__construct($api, "item", "Gives yourself an item", "<item[:damage]> [amount]", false);
         $this->setPermission("essentials.item");
     }
 
