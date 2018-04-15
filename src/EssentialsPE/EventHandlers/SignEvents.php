@@ -9,6 +9,7 @@ use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\block\SignChangeEvent;
 use pocketmine\event\entity\EntityRegainHealthEvent;
 use pocketmine\event\player\PlayerInteractEvent;
+use pocketmine\item\Item;
 use pocketmine\math\Vector3;
 use pocketmine\tile\Sign;
 use pocketmine\utils\TextFormat;
@@ -146,6 +147,7 @@ class SignEvents extends BaseEventHandler{
                         }
                         if($this->getAPI()->isRepairable($item = $event->getPlayer()->getInventory()->getItemInHand())){
                             $item->setDamage(0);
+			    $event->getPlayer()->getInventory()->setItem($item);
                             $event->getPlayer()->sendMessage(TextFormat::GREEN . "§dItem successfully repaired" . TextFormat::GREEN . ($price ? " for " . $this->getAPI()->getCurrencySymbol() . $price : null));
                         }
                     }elseif($v === "All"){
@@ -159,14 +161,16 @@ class SignEvents extends BaseEventHandler{
                                 $this->getAPI()->addToPlayerBalance($event->getPlayer(), -$price);
                             }
                         }
-                        foreach ($event->getPlayer()->getInventory()->getContents(true) as $item){
+                        foreach ($event->getPlayer()->getInventory()->getContents() as $i => $item){
                             if($this->getAPI()->isRepairable($item)){
-                                $event->getPlayer()->getInventory()->setDamage(0);
+				$event->getPlayer()->getInventory()->setItem($item);
+                                $item->setDamage(0);
                             }
                         }
-                        foreach ($event->getPlayer()->getArmorInventory()->getContents(true) as $item){
+                        foreach ($event->getPlayer()->getArmorInventory()->getContents() as $i => $item){
                             if($this->getAPI()->isRepairable($item)){
-                                $event->getPlayer()->getArmorInventory()->setDamage(0);
+				$event->getPlayer()->getInventory()->setItem($item);
+                                $item->setDamage(0);
                             }
                         }
                         $event->getPlayer()->sendMessage(TextFormat::GREEN . "All the tools on your inventory were repaired" . TextFormat::AQUA . "\n(including the equipped Armor)" . TextFormat::GREEN . ($price ? " for " . $this->getAPI()->getCurrencySymbol() . $price : null));
