@@ -15,7 +15,7 @@ class Gamemode extends BaseOverrideCommand{
      */
     public function __construct(BaseAPI $api){
         parent::__construct($api, "gamemode", "Change player gamemode", "<mode> [player]", true, ["gma", "gmc", "gms", "gmt", "adventure", "creative", "survival", "spectator", "viewer"]);
-        $this->setPermission("essentials.gamemode.use.*");
+        $this->setPermission("essentials.gamemode.use");
     }
 
     /**
