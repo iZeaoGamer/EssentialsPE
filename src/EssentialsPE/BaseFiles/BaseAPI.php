@@ -1167,7 +1167,7 @@ class BaseAPI{
      *
      * @return null|string
      */
-    public function getQuickReply(CommandSender $sender): ?string{
+    public function getQuickReply(CommandSender $sender){
         if($sender instanceof Player){
             $q = $this->getSession($sender)->getQuickReply();
         }else{
