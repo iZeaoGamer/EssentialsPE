@@ -51,7 +51,7 @@ class SessionCreateEvent extends BaseCustomEvent{
      * @param string $key
      * @param mixed $value
      */
-    public function setValue(string $key, $value): void{
+    public function setValue(string $key, mixed $value): void{
         if(!isset($this->values[$key])){
             return;
         }
