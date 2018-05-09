@@ -1384,12 +1384,12 @@ class BaseAPI{
      *
      * @return Player|OfflinePlayer
      */
-    public function getOfflinePlayer(string $name): OfflinePlayer{
+    public function getOfflinePlayer(  $name): OfflinePlayer{
         $player = $this->getPlayer($name);
-        if($player === false){
+        if($player){
             $player = new OfflinePlayer($this->getServer(), strtolower($name));
         }
-        return $player;
+        return $this->getPlayer($name);
     }
     /**
      * Let you see who is near a specific player
