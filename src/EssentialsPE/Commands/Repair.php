@@ -45,26 +45,37 @@ class Repair extends BaseCommand{
                 $sender->sendMessage(TextFormat::RED . $this->getPermissionMessage());
                 return false;
             }
-            foreach($sender->getInventory()->getContents() as $item){
+            foreach($sender->getInventory()->getContents() as $index => $item){
                 if($this->getAPI()->isRepairable($item)){
-                    $item->setDamage(0);
+                    if($item->getDamage() > 0){
+                        $sender->getInventory()->setItem($index, $item->setDamage(0));
+                    }
                 }
             }
             $m = TextFormat::GREEN . "§bAll the tools in your inventory were repaired!";
             if($sender->hasPermission("essentials.repair.armor")){
-                foreach($sender->getArmorInventory()->getContents() as $item){
+                foreach($sender->getArmorInventory()->getContents() as $index => $item){
                     if($this->getAPI()->isRepairable($item)){
-                        $item->setDamage(0);
+                       if($item->getDamage() > 0){
+                          $sender->getArmorInventory()->setItem($index, $item->setDamage(0));
+                    
+                       }
                     }
                 }
                 $m .= TextFormat::AQUA . " §3(Including the equipped Armor)";
             }
         }else{
+            $index = $sender->getInventory()->getHeldItemIndex();
+            $item = $sender->getInventory()->getItem($index);
             if(!$this->getAPI()->isRepairable($sender->getInventory()->getItemInHand())){
                 $sender->sendMessage(TextFormat::RED . "[Error] §2This item can't be repaired!");
                 return false;
             }
-            $sender->getInventory()->getItemInHand()->setDamage(0);
+            if($item->getDamage() > 0){
+                $sender->getInventory()->setItem($index, $item->setDamage(0));
+            }else{
+                $sender->sendMessage(TextFormat::RED . "[Error] Item does not have any damage");
+            }
             $m = TextFormat::GREEN . "§bItem successfully repaired!";
         }
         $sender->sendMessage($m);
