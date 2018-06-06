@@ -617,3 +617,6 @@ permissions:
             essentials.worth:
                 default: true
                 description: "Get the price of an item"
+            essentials.pong:
+                default: true
+                description: "Pong"
