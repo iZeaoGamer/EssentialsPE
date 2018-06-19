@@ -2115,7 +2115,7 @@ class BaseAPI{
      */
     public function setVanish(Player $player, bool $state, bool $noPacket = false): bool{
         if($this->invisibilityEffect === null){
-            $effect = new EffectInstance(Effect::getEffect(Effect::INVISIBILITY) (99999999*20), (1), (false));
+            $effect = new EffectInstance(Effect::getEffect(Effect::INVISIBILITY), 99999999*20, 1, false);
             $this->invisibilityEffect = $effect;
         }
         $this->getServer()->getPluginManager()->callEvent($ev = new PlayerVanishEvent($this, $player, $state, $noPacket));
